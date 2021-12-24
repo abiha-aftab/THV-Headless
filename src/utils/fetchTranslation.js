@@ -2,7 +2,6 @@ import { useTheme } from '../hooks/useTheme'
 import React, { useEffect, useState } from 'react'
 
 const FetchTranslations = ({ language }) => {
-  console.log('hello')
   const { state, actions } = useTheme()
   const [translations, setTranslations] = useState([])
 
