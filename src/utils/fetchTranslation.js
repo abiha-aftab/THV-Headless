@@ -1,5 +1,4 @@
 export const fetchTranslation = (language) => {
-  console.log('hello')
   const tmp = []
   fetch(
     `${process.env.GATSBY_DELIVERY_API_URL}${process.env.GATSBY_KONTENT_PROJECT_ID}/items/translations?language=${language}`
