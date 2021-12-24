@@ -59,11 +59,11 @@ const NavTop = ({ languageCode = 'en', languages = [] }) => {
           title={
             languageCode === 'de'
               ? translatedItems
-                ? translatedItems.Title
-                : ' '
+                ? translatedItems?.Title
+                : 'Warenkorbee'
               : translatedItems
-              ? translatedItems.Title
-              : ' '
+              ? translatedItems?.Title
+              : 'Basketee'
           }
         />
         <Dropdown
