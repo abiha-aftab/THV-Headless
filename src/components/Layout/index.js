@@ -35,7 +35,6 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
   useEffect(() => {
     if (languageCode) {
       let tmp = fetchTranslation(languageCode)
-      console.log('mytmp', tmp)
       setTranslations(tmp)
       actions.changeTranslations(tmp)
     } else {
