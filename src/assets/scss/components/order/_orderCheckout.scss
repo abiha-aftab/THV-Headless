@@ -1,0 +1,12 @@
+.orderCheckout {
+  display: flex;
+  border: 1px solid $color-slate;
+  margin-top: 1rem;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  &__image {
+    height: 100px;
+    width: 100px;
+  }
+}

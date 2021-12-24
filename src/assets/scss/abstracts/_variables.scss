@@ -1,0 +1,72 @@
+/* === Typography === */
+
+$font-family-base: 'Merriweather Sans', sans-serif;
+
+$font-size-base: 1rem;
+$font-size-h1: $font-size-base * 2.25;
+$font-size-h2: $font-size-base * 1.875;
+$font-size-h3: $font-size-base * 1.5;
+$font-size-h4: $font-size-base * 1.25;
+$font-size-lead: $font-size-base * 1.25;
+$font-size-small: $font-size-base * 0.875;
+
+$font-weight-light: 200;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+$font-weight-strong: 700;
+
+/* === Line height === */
+
+$line-height-list: 1.5rem;
+
+/* === Colors === */
+
+$color-crimson: #c8102e;
+$color-slate: #505759;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-sky: #8ba9bd;
+$color-sky-light: #f6f8f9;
+$color-steel: #d1dde0;
+$color-steel-light: #f6f8f9;
+$color-primary: #dbd7cd;
+$color-dark-gray: #505759;
+$color-primary-gray: #898d8d;
+$color-beige: #b7b09c;
+$color-light-beige: #e6e4df;
+$color-focus: #0099ff;
+
+$colors: (
+  'crimson': $color-crimson,
+  'slate': $color-slate,
+  'sky': $color-sky,
+  'sky-light': $color-sky-light,
+  'steel': $color-steel,
+  'steel-light': $color-steel-light,
+  'white': $color-white,
+);
+
+/* === Breakpoints === */
+
+$breakpoints: (
+  'md': 768px,
+  'lg': 1024px,
+);
+
+/* === Layout === */
+
+$max-width-container: 1140px;
+$max-width-nav-container: 1340px;
+
+/* === Spacing === */
+
+$spacer: 1rem;
+
+/* === Buttons === */
+
+$btn-hover-amount: 4%;
+$btn-border-radius: 0.25rem;
+
+/* === Transitions === */
+
+$transition-default: 0.2s all;

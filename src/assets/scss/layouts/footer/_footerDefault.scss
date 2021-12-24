@@ -1,0 +1,95 @@
+.footerDefault {
+  background-color: $color-primary;
+  &__scroll-top {
+    color: $color-white;
+    background-color: rgba( 0,0,0,0.4 );
+    font-size: 20px;
+    border-radius: 3px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    line-height: 38px;
+    width: 40px;
+    text-align: center;
+    z-index: 10;
+    transition: opacity 300ms ease-in-out;
+    cursor: pointer;
+    border: none;
+    &:hover {
+      background-color: rgba( 0,0,0,0.6 );
+    }
+  }
+  &__navigation {
+    padding-bottom: 2rem;
+    .gap-1 {
+      row-gap: 0;
+      @include md {
+        row-gap: 1rem;
+      }
+    }
+    &-social {
+      margin-bottom: 2rem;
+      @include md {
+        margin-bottom: 0;
+      }
+      .icon {
+        display: inline-block;
+        padding: 0.5rem 0.8rem 0.4rem;
+        background-color: $color-crimson;
+        margin-right: 0.8rem;
+        @include md {
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        cursor: pointer;
+        svg {
+          width: 25px;
+          height: 25px;
+          fill: $color-white;
+        }
+      }
+    }
+    &-links {
+      list-style: none;
+      margin-bottom: 2rem;
+      @include md {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+      }
+    }
+    &-link-item {
+      a {
+        display: block;
+        color: $color-dark-gray;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.2rem 0;
+        @include md {
+          padding-bottom: 1rem;
+        }
+
+        &:hover {
+          color: $color-dark-gray;
+        }
+      }
+    }
+  }
+  &__text {
+    p {
+      font-size: 0.7rem;
+      color: $color-dark-gray;
+      margin-bottom: 0;
+    }
+    a {
+      color: $color-dark-gray;
+      text-decoration: underline;
+      &:hover {
+        color: $color-crimson;
+      }
+    }
+    &-disclaimer {
+      margin-bottom: 2rem;
+    }
+  }
+}

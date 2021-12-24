@@ -1,0 +1,12 @@
+.events {
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: $spacer * 2;
+    }
+  }
+  &__event {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.infographics {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    &__title{
+        color: $color-crimson;
+    }
+    &__item {
+        p:first-child { 
+            font-weight: bold;
+        }
+        img{
+            margin: 0 auto;
+            display: block;
+        }
+        p:last-child {
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 18px;
+        }
+    }
+}

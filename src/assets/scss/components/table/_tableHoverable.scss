@@ -1,0 +1,100 @@
+.hoverable {
+  table {
+    border-collapse: separate;
+    border-spacing: 0 3px;
+    color: #505759;
+    overflow: hidden;
+    width: 88%;
+
+    tbody {
+      > tr {
+        &:first-child {
+          > td {
+            padding: 31px 12px 32px 12px;
+            text-align: left;
+            background-color: #d1dde0;
+            width: auto;
+            font-weight: bold;
+            color: #505759;
+            vertical-align: middle;
+          }
+        }
+        &:nth-of-type(n) {
+          > td {
+            &:first-of-type {
+              background-color: #d1dde0;
+              position: sticky;
+            }
+          }
+        }
+        &:nth-of-type(1) {
+          > td {
+            &:first-of-type {
+              background-color: white;
+            }
+          }
+        }
+      }
+      tr {
+        &:hover {
+          background-color: #f1efeb;
+        }
+        &:first-child {
+          z-index: 2;
+          position: relative;
+        }
+        &:not(:first-child) {
+          td {
+            &:not(:first-child) {
+              &:hover {
+                &::after {
+                  background-color: #f1efeb;
+                  content: '';
+                  height: 10000px;
+                  left: 0;
+                  position: absolute;
+                  top: -5000px;
+                  width: 100%;
+                  z-index: -1;
+                }
+              }
+            }
+          }
+        }
+        padding-bottom: 5rem;
+        td {
+          padding: 12px;
+          vertical-align: text-top;
+          position: relative;
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .hoverable {
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+    overflow-x: auto;
+    display: block;
+    max-width: 90vw;
+
+    tbody {
+      > tr {
+        &:nth-of-type(n) {
+          > td {
+            &:first-of-type {
+              position: sticky;
+            }
+          }
+        }
+      }
+      td {
+        padding: 30px;
+        vertical-align: text-top;
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+body {
+  font-size: $font-size-base;
+  line-height: line-height($font-size-base);
+  color: $color-slate;
+}
+
+h1 {
+  font-size: $font-size-h1;
+  line-height: line-height($font-size-h1);
+  margin-bottom: $spacer * 3;
+  font-weight: $font-weight-strong;
+  color: $color-crimson;
+}
+
+h2 {
+  font-size: $font-size-h2;
+  line-height: line-height($font-size-h2);
+  font-weight: $font-weight-bold;
+  color: $color-dark-gray;
+  margin-bottom: $spacer * 2;
+}
+
+h3 {
+  font-size: $font-size-h3;
+  line-height: line-height($font-size-h3);
+  font-weight: $font-weight-strong;
+  margin-bottom: $spacer;
+  color: $color-crimson;
+}
+
+h4 {
+  font-size: $font-size-h4;
+  line-height: line-height($font-size-h4);
+  margin-bottom: $spacer;
+}
+
+p {
+  font-size: $font-size-base * 1.125;
+  line-height: line-height($font-size-base);
+  margin-bottom: $spacer;
+  color: $color-slate;
+}
+
+ul.list {
+  font-size: $font-size-base;
+  line-height: $line-height-list;
+  margin-bottom: $spacer;
+  color: $color-slate;
+}
+
+.small {
+  font-size: $font-size-small;
+  line-height: line-height($font-size-small);
+}
+
+.lead {
+  font-size: $font-size-lead;
+  line-height: line-height($font-size-lead);
+  margin-bottom: $spacer * 2;
+  color: $color-slate;
+}
+
+hr {
+  margin: 2rem 0;
+  border-color: $color-slate;
+  @include md {
+    margin: 3rem 0;
+  }
+}

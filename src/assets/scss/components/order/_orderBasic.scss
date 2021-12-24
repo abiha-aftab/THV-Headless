@@ -1,0 +1,33 @@
+.orderBasic {
+  &__item {
+    display: flex;
+    @include shadow;
+  }
+
+  &__image {
+    flex: 0 0 20rem;
+    max-height: 20rem;
+  }
+  &__body {
+    padding: 2rem;
+    flex: 1;
+    position: relative;
+  }
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  &__remove {
+    border: none;
+    background: none;
+    position: absolute;
+    color: $color-slate;
+    top: 2rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: $transition-default;
+    &:hover {
+      color: $color-crimson;
+    }
+  }
+}

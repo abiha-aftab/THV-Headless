@@ -1,0 +1,237 @@
+@use 'sass:math';
+
+/* === Layout === */
+
+.container {
+  @include container;
+}
+
+.container-sm {
+  @include container;
+  max-width: math.div($max-width-container, 1.15);
+}
+
+.container-right {
+  padding: 0 $spacer;
+  @include lg {
+    padding-right: 0;
+    margin-left: calc(50vw - $max-width-container / 2);
+  }
+}
+
+.container-left {
+  padding: 0 $spacer;
+  @include lg {
+    padding-left: 0;
+    margin-right: calc(50vw - $max-width-container / 2);
+  }
+}
+
+.section {
+  @include section;
+  &-bottom {
+    padding-top: 0;
+    padding-bottom: 5rem;
+  }
+}
+
+.m-section {
+  @include section;
+  @include md {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.fluid {
+  width: 100%;
+  height: auto;
+}
+
+/* === Grid === */
+
+$columns: 12;
+
+@for $i from 1 through $columns {
+  .grid-#{$i} {
+    display: grid;
+    gap: $spacer * 2;
+    grid-template-columns: repeat(#{$i}, 1fr);
+  }
+  .col-#{$i} {
+    grid-column: span #{$i};
+  }
+  .start-#{$i} {
+    grid-column-start: #{$i};
+  }
+  .end-#{$i} {
+    grid-column-end: #{$i};
+  }
+  @include md {
+    .grid-md-#{$i} {
+      display: grid;
+      gap: $spacer * 2;
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+    .col-md-#{$i} {
+      grid-column: span #{$i};
+    }
+    .start-md-#{$i} {
+      grid-column-start: #{$i};
+    }
+    .end-md-#{$i} {
+      grid-column-end: #{$i};
+    }
+  }
+}
+
+$tracks: 13;
+
+@for $i from 1 through $tracks {
+  .start-#{$i} {
+    grid-column-start: #{$i};
+  }
+  .end-#{$i} {
+    grid-column-end: #{$i};
+  }
+  @include md {
+    .start-md-#{$i} {
+      grid-column-start: #{$i};
+    }
+    .end-md-#{$i} {
+      grid-column-end: #{$i};
+    }
+  }
+}
+
+$gap: 6;
+
+@for $i from 0 through $gap {
+  .gap-#{$i} {
+    display: grid;
+    gap: #{$i}rem;
+  }
+  @include md {
+    .gap-md-#{$i} {
+      display: grid;
+      gap: #{$i}rem;
+    }
+  }
+}
+
+$order: 2;
+
+@for $i from 1 through $order {
+  .order-#{$i} {
+    order: #{$i};
+  }
+  @include md {
+    .order-md-#{$i} {
+      order: #{$i};
+    }
+  }
+}
+
+/* === Colors === */
+
+@each $key, $val in $colors {
+  .text-#{$key} {
+    color: #{$val};
+  }
+  .bg-#{$key} {
+    background: #{$val};
+    color: contrast($val);
+  }
+}
+
+/* === Utilities === */
+
+$utilities: (
+  'text-align': (
+    'prefix': 'text',
+    'values': (
+      'center': center,
+    ),
+  ),
+  'margin-top': (
+    'prefix': 'mt',
+    'values': (
+      '0': 0,
+      '1': 1rem,
+      '2': 2rem,
+      '3': 3rem,
+      '4': 4rem,
+      '5': 5rem,
+    ),
+  ),
+  'margin-right': (
+    'prefix': 'mr',
+    'values': (
+      '50': 0.5rem,
+      '1': 1rem,
+    ),
+  ),
+  'margin-left': (
+    'prefix': 'ml',
+    'values': (
+      '50': 0.5rem,
+      '1': 1rem,
+    ),
+  ),
+  'margin-bottom': (
+    'prefix': 'mb',
+    'values': (
+      '0': 0,
+      '1': 1rem,
+      '2': 2rem,
+      '3': 3rem,
+      '4': 4rem,
+      '5': 5rem,
+    ),
+  ),
+  'padding-top': (
+    'prefix': 'pt',
+    'values': (
+      '0': 0,
+      '1': 1rem,
+      '2': 2rem,
+      '3': 3rem,
+      '4': 4rem,
+      '5': 5rem,
+    ),
+  ),
+  'padding-bottom': (
+    'prefix': 'pb',
+    'values': (
+      '0': 0,
+      '1': 1rem,
+      '2': 2rem,
+      '3': 3rem,
+      '4': 4rem,
+      '5': 5rem,
+    ),
+  ),
+  'display': (
+    'prefix': 'd',
+    'values': (
+      'none': none,
+      'block': block,
+    ),
+  ),
+);
+
+@each $property, $map in $utilities {
+  $prefix: map-get($map, 'prefix');
+  $values: map-get($map, 'values');
+
+  @each $k, $v in $values {
+    .#{$prefix}-#{$k} {
+      #{$property}: $v;
+    }
+    @include md {
+      .#{$prefix}-md-#{$k} {
+        #{$property}: $v;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.quantity {
+  &__controls {
+    display: flex;
+    align-items: center;
+  }
+  &__count {
+    border-top: 1px solid $color-primary-gray;
+    border-bottom: 1px solid $color-primary-gray;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-primary-gray;
+    font-size: $font-size-h4;
+  }
+  &__btn {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $color-primary-gray;
+    color: $color-white;
+    border: none;
+    border-radius: $btn-border-radius;
+    transition: $transition-default;
+    cursor: pointer;
+    &:hover {
+      background: $color-crimson;
+    }
+  }
+}

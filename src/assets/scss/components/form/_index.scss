@@ -1,0 +1,38 @@
+@import './formBasic';
+
+@mixin input {
+  display: block;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  font-size: $font-size-base;
+  border-radius: $btn-border-radius;
+  border: 1px solid $color-primary-gray;
+  outline: none;
+  color: $color-slate;
+  @include focus;
+}
+
+.form {
+  &__text {
+    @include input;
+  }
+  &__select {
+    @include input;
+  }
+  &__fieldset {
+    border: none;
+  }
+  &__checkbox {
+    margin-right: 0.5rem;
+  }
+  &__control {
+    position: relative;
+  }
+  &__error {
+    position: absolute;
+    bottom: -25px;
+    color: $color-crimson;
+    font-size: $font-size-small;
+  }
+}

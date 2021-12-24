@@ -1,0 +1,247 @@
+.stayInformedForm .mktoForm {
+  margin-top: 1rem;
+  display: flex;
+}
+
+#mktoForm_13727 {
+  display: block;
+}
+
+h5.newsletter-thanks-message {
+  color: $color-crimson;
+}
+
+.mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
+  background: #7a99ac !important;
+  border: none !important;
+  font-size: 16px !important;
+  border-radius: 5px;
+  padding: 13px 30px !important;
+  margin-top: 47px;
+}
+
+.mktoForm button,
+.mktoForm input,
+.mktoForm select,
+.mktoForm textarea {
+  font-family: $font-family-base;
+}
+
+.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:hover,
+.mktoForm .mktoButtonWrap.mktoSimple .mktoButton:focus {
+  background: $color-crimson !important;
+}
+
+.stayInformedForm .mktoButtonWrap.mktoSimple {
+  margin-left: 20px !important;
+}
+
+.stayInformedForm .mktoForm.mktoHasWidth.mktoLayoutLeft {
+  width: 100% !important;
+}
+
+.stayInformedForm .mktoFormRow {
+  width: 0;
+}
+
+#confirmnewsletterform[style*='visibility: visible'] {
+  height: auto !important;
+  margin-top: 40px !important;
+  margin-bottom: 50px;
+}
+
+.stayInformedForm .mktoForm .mktoFormRow:nth-of-type(-n + 3) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mktoForm .mktoFormRow.dynamic {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mktoForm .mktoFormRow.dynamic #LblspecialtyDetail {
+  width: 100% !important;
+}
+
+.stayInformedForm .mktoForm .mktoFieldWrap {
+  float: none !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.mktoForm .mktoFormRow input[type='text'],
+.mktoForm .mktoFormRow input[type='url'],
+.mktoForm .mktoFormRow input[type='email'],
+.mktoForm .mktoFormRow input[type='tel'],
+.mktoForm .mktoFormRow input[type='number'],
+.mktoForm .mktoFormRow input[type='date'],
+.mktoForm .mktoFormRow textarea.mktoField,
+.mktoForm .mktoFormRow select.mktoField {
+  width: 100% !important;
+  padding: 15px 10px !important;
+  border-radius: 5px !important;
+  background-color: transparent;
+}
+
+.mktoForm select,
+.mktoForm input {
+  padding: 17px 10px;
+  height: auto !important;
+  border: 1px solid $color-black;
+  border-radius: 4px;
+  background-color: transparent;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 10px);
+  background-position-y: center;
+}
+
+.mktoForm input {
+  background-image: none;
+}
+
+.mktoForm .mktoRequiredField .mktoAsterix {
+  display: none !important;
+}
+
+.stayInformedForm .mktoForm .mktoLabel[for='Email'] {
+  width: 1000px !important;
+}
+
+.mktoForm .mktoLabel {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: $font-family-base;
+}
+
+.stayInformedForm .mktoForm .mktoFormCol {
+  margin-right: 10px;
+}
+
+.stayInformedForm .mktoOffset {
+  width: 0 !important;
+}
+#confirmnewsletterform,
+.mktoGutter {
+  height: 0;
+}
+
+.half-500-center {
+  padding-left: calc(50% - 240px);
+}
+
+div#teconsent img {
+  max-height: 30px;
+}
+
+@media (max-width: 768px) {
+  .stayInformedForm .marketoForm {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .stayInformedForm .mktoForm .mktoFormRow:nth-of-type(-n + 4) {
+    width: 100%;
+  }
+
+  .stayInformedForm .mktoButtonWrap.mktoSimple {
+    margin-left: 0px !important;
+  }
+
+  .stayInformedForm .mktoForm .mktoButtonWrap.mktoSimple .mktoButton {
+    width: 100%;
+  }
+}
+
+// stuff
+
+/* End custom CSS */
+/* Start custom CSS for section, class: .elementor-element-71617488 */
+@media (max-width: 480px) {
+  .site-content {
+    .elementor-column-wrap.elementor-element-populated {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .share-icon {
+    bottom: -60px !important;
+  }
+}
+.mktoForm .mktoFormRow input[type='text'],
+.mktoForm .mktoFormRow input[type='email'],
+.mktoForm .mktoFormRow select.mktoField {
+  padding: 7px 20px !important;
+  background-color: #fff;
+}
+
+.mktoForm .mktoFieldWrap {
+  float: none !important;
+  width: 100% !important;
+}
+.mktoForm .mktoFormCol {
+  float: none;
+  width: 100% !important;
+}
+
+.mktoForm .mktoRadioList > input,
+.mktoForm .mktoCheckboxList > input {
+  padding: 5px !important;
+}
+
+.mktoForm .mktoOffset {
+  width: 1px !important;
+}
+
+.mktoForm .mktoRadioList,
+.mktoForm .mktoCheckboxList {
+  width: 100% !important;
+}
+
+.mktoValid label {
+  position: relative;
+}
+
+.mktoValid label:after {
+  left: -16px;
+  top: 1px;
+  width: 5px;
+  height: 6px;
+  border: solid #000;
+  border-width: 0 2px 1px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  display: block;
+  content: '';
+  position: absolute;
+}
+.mktoForm .mktoButtonRow {
+  margin-left: 0px !important;
+}
+
+.mktoForm {
+  text-align: left;
+  width: auto !important;
+}
+.register-form .elementor-element-populated {
+  margin-left: 0 !important;
+} /* End custom CSS */
+/* Start custom CSS for section, class: .elementor-element-36a91c99 */
+.register-form {
+  padding-left: calc(50vw - 570px) !important;
+  padding-right: calc(50vw - 570px) !important;
+}
+@media (max-width: 1024px) {
+  .register-form {
+    padding: 30px 24px !important;
+  }
+} /* End custom CSS */

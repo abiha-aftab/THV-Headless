@@ -1,0 +1,40 @@
+.steps {
+  display: flex;
+  justify-content: space-between;
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    &--active .steps__number {
+      background: $color-crimson;
+      color: white;
+    }
+    &--active .steps__title {
+      font-weight: $font-weight-bold;
+    }
+  }
+  &__number {
+    $size: 3rem;
+    font-size: $font-size-h3;
+    color: $color-crimson;
+    border: 2px solid $color-crimson;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $size;
+    height: $size;
+    margin-bottom: 1rem;
+  }
+  &__title {
+    max-width: 20rem;
+    text-align: center;
+    min-width: 7rem;
+  }
+  &__line {
+    margin: 1.25rem 0 0;
+    height: 2px;
+    background: $color-slate;
+    width: 100%;
+  }
+}
