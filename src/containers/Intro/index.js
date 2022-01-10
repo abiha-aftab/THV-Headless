@@ -24,12 +24,10 @@ const Intro = ({ data, socialSharing }) => {
           ],
         },
       },
-      system: {
-        id: { value: id },
-        codename: { value: codename },
-      },
+      system: { id, codename },
     },
   ] = data
+  console.log(' id ', id, ' data ', codename)
   return (
     <section
       className="container-right grid-md-12 gap-4 intro"
