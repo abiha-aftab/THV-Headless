@@ -9,6 +9,6 @@ exports.wrapPageElement = ({ element, props }) => {
 
 exports.onRenderBody = ({ setHeadComponents }) => {
   setHeadComponents([
-    <script src="//info.edwards.com/js/forms2/js/forms2.min.js"></script>,
+    <script defer={true} src="//info.edwards.com/js/forms2/js/forms2.min.js"></script>,
   ])
 }

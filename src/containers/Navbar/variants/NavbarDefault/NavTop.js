@@ -5,15 +5,39 @@ import { navigate } from 'gatsby'
 import { useTheme } from '../../../../hooks/useTheme'
 import { prepareTranslations } from '../../../../utils/prepareTranslations'
 
+let useClickOutside = (handler) => {
+  let domNode = useRef()
+  useEffect(() => {
+    let mouseDownHandler = (event) => {
+      if (!domNode?.current?.contains(event.target)) {
+        handler()
+      }
+    }
+    document.addEventListener('mousedown', mouseDownHandler)
+    return () => {
+      document.removeEventListener('mousedown', mouseDownHandler)
+    }
+  })
+  return domNode
+}
+
 const NavTop = ({ languageCode = 'en', languages = [] }) => {
   const [searchClicked, setSearchClicked] = useState(false)
-  const searchRef = useRef(null)
+
+  //input should hide when clicked outside
+  let searchRef = useClickOutside(() => {
+    setSearchClicked(false)
+  })
+
   const { state } = useTheme()
 
-  let key = 'Basket'
-  let translatedItems
+  let translatedItemBasket = ''
+  let translatedItemSearch = ''
   if (state.translations.length) {
-    translatedItems = prepareTranslations(state.translations, key)
+    let key = 'Basket'
+    translatedItemBasket = prepareTranslations(state.translations, key)
+    key = 'Search'
+    translatedItemSearch = prepareTranslations(state.translations, key)
   }
   useEffect(() => {
     if (searchClicked) {
@@ -26,45 +50,50 @@ const NavTop = ({ languageCode = 'en', languages = [] }) => {
       <ul>
         {!searchClicked && (
           <li onClick={() => setSearchClicked(true)}>
-            <MdSearch /> search
+            <MdSearch />
+            {translatedItemSearch?.Search
+              ? translatedItemSearch?.Search
+              : 'Search'}
           </li>
         )}
         {searchClicked && (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              navigate(
-                languageCode === 'en'
-                  ? `/search?s=${searchRef.current.value}`
-                  : `/${languageCode}/search?s=${searchRef.current.value}`
-              )
-            }}
-          >
-            <div>
-              <MdSearch />
+          <li>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                navigate(
+                  languageCode === 'en'
+                    ? `/search?s=${searchRef.current.value}`
+                    : `/${languageCode}/search?s=${searchRef.current.value}`
+                )
+              }}
+            >
               <input
                 type="text"
                 name="search"
-                placeholder="Search.."
-                onMouseLeave={() => setSearchClicked(false)}
+                placeholder={
+                  translatedItemSearch?.Placeholder
+                    ? translatedItemSearch?.Placeholder
+                    : 'Search...'
+                }
                 ref={searchRef}
                 className="navbarDefault__search-box"
               />
-            </div>
-          </form>
+            </form>
+          </li>
         )}
         <Dropdown
           type="cart"
-          languageCode={languageCode}
           title={
             languageCode === 'de'
-              ? translatedItems
-                ? translatedItems?.Title
-                : 'Warenkorbee'
-              : translatedItems
-              ? translatedItems?.Title
-              : 'Basketee'
+              ? translatedItemBasket
+                ? translatedItemBasket?.Title
+                : 'Warenkorb'
+              : translatedItemBasket
+              ? translatedItemBasket?.Title
+              : 'Basket'
           }
+          languageCode={languageCode}
         />
         <Dropdown
           type="language"

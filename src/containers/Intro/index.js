@@ -2,8 +2,10 @@ import React from 'react'
 import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import { graphql } from 'gatsby'
 import Image from '../../components/Image'
+import SocialSharing from '../SocialSharing'
 
-const Intro = ({ data }) => {
+const Intro = ({ data, socialSharing }) => {
+  const { label, text, sources } = socialSharing
   const [
     {
       elements: {
@@ -22,11 +24,24 @@ const Intro = ({ data }) => {
           ],
         },
       },
+      system: {
+        id: { value: id },
+        codename: { value: codename },
+      },
     },
   ] = data
   return (
-    <section className="container-right grid-md-12 gap-4 intro">
-      <div className="col-md-7 intro__content">
+    <section
+      className="container-right grid-md-12 gap-4 intro"
+      data-kontent-item-id={id}
+    >
+      <div
+        className="col-md-7 intro__content"
+        data-kontent-element-codename={codename}
+      >
+        {sources.length > 0 && (
+          <SocialSharing label={label} text={text} sources={sources} />
+        )}
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
         <RichTextElement value={description} />
@@ -42,6 +57,10 @@ export default Intro
 
 export const query = graphql`
   fragment intro on kontent_item_intro {
+    system {
+      id
+      codename
+    }
     id
     elements {
       title {

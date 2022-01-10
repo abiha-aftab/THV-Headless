@@ -12,24 +12,24 @@ const OrderBasic = ({ data }) => {
     actions.changeOrders(filteredOrders)
   }
   return (
-    <div className="grid-md-12 orderBasic">
-      <div className="col-md-10">
+    <>
+      <div className="col-md-9 orderBasic__item-contain">
         <div className="orderBasic__item">
           <Image className="orderBasic__image" image={image} />
           <div className="orderBasic__body">
             <h3 className="text-slate">{title}</h3>
             <p>{description}</p>
-
             <button className="orderBasic__remove" onClick={removeOrder}>
+              <span>Remove</span>
               <FaTimes />
             </button>
           </div>
         </div>
       </div>
-      <div className="col-md-2">
+      <div className="col-md-3 orderBasic__quantity">
         <Quantity count={count} id={id} />
       </div>
-    </div>
+    </>
   )
 }
 

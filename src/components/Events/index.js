@@ -17,13 +17,14 @@ const Events = ({ events, title, description }) => {
                   {
                     elements: {
                       video_id: { value: video_id },
+                      thumbnail: {value: thumbnail},
                     },
                   },
                 ],
               },
             },
           } = event
-          return <Event key={title} title={title} url={video_id} />
+          return <Event key={title} title={title} url={video_id} thumbnail={thumbnail} />
         })}
       </div>
     </>

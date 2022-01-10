@@ -1,0 +1,103 @@
+.socialSharing {
+  padding-bottom: 2rem;
+  &__label {
+    float: right;
+    font-size: 1rem;
+    font-weight: $font-weight-bold;
+    color: $color-dark-gray;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    svg {
+      margin-left: 0.8rem;
+      vertical-align: bottom;
+    }
+    @include md {
+      &:hover {
+        color: $color-crimson;
+        svg {
+          fill: $color-crimson;
+        }
+      }
+    }
+  }
+  &__contain {
+    width: fit-content;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    padding: 1em 1.3em;
+    @include md {
+      top: 16%;
+      right: 40%;
+    }
+  }
+  &__text {
+    text-align: left;
+    color: $color-primary-gray;
+    margin-bottom: 0.5rem;
+  }
+  &__list {
+    &-item {
+      display: inline-block;
+      padding: 0.2rem 0.4rem 0.2rem;
+      background-color: $color-primary-gray;
+      margin-right: 0.4rem;
+      border: none;
+      height: 2.2rem;
+      @include md {
+        height: 2.45rem;
+        padding: 0.5rem 0.8rem 0.2rem;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+      cursor: pointer;
+      svg {
+        width: 25px;
+        height: 25px;
+        fill: $color-white;
+      }
+    }
+  }
+}
+.infoblock {
+  .socialSharing {
+    .socialSharing__contain {
+      right: 15%;
+      @include md {
+        right: 25%;
+      }
+    }
+  }
+}
+@media (max-width:1024px) {
+  .socialSharing {
+    &__contain {
+      top: 6%;
+      right: 52%;
+    }
+  }
+  .infoblock {
+    .socialSharing {
+      .socialSharing__contain {
+        @include md {
+          right: 15%;
+        }
+      }
+    }
+  }
+}
+@media (max-width:420px) {
+  .socialSharing {
+    &__contain {
+      top: 5%;
+      right: 4%;
+    }
+  }
+}

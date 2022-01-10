@@ -3,8 +3,9 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import getStyles from '../../utils/getStyles'
 import renderLinkedItem from '../../utils/renderLinkedItem'
+import SocialSharing from '../SocialSharing'
 
-const InfoBlock = ({ data }) => {
+const InfoBlock = ({ data, socialSharing = null }) => {
   const { backgroundColor, paddingTop, paddingBottom } = getStyles(data)
   const {
     content: { value: content, modular_content },
@@ -13,6 +14,7 @@ const InfoBlock = ({ data }) => {
   return (
     <section className={`${backgroundColor} section ${paddingTop} ${paddingBottom}`}>
       <div className="container infoblock">
+        {socialSharing && socialSharing.sources.length > 0 && <SocialSharing label={socialSharing.label} text={socialSharing.text} sources={socialSharing.sources} />}
         <RichTextElement
           value={content}
           linkedItems={modular_content}
@@ -48,6 +50,7 @@ export const query = graphql`
         modular_content {
           ...table
           ...infographics
+          ...cards
           system {
             type
             codename

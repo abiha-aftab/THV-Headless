@@ -1,6 +1,5 @@
 .resource {
   background-color: $color-white;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   transition: all 0.2s;
@@ -15,6 +14,17 @@
     padding: 1.5rem 1rem;
     position: relative;
     font-size: $font-size-small;
+  }
+  &__image {
+    cursor: pointer;
+  }
+  &__title {
+    cursor: pointer;
+    @include md {
+      &:hover {
+        color: $color-crimson;
+      }
+    }
   }
   &__type {
     position: absolute;
@@ -51,6 +61,50 @@
     }
     &:hover {
       color: $color-crimson;
+    }
+  }
+}
+.order-banner {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  top: 1rem;
+  left: 0;
+  margin: 0 0.5rem;
+  color: $color-dark-gray;
+  font-size: $font-size-small;
+  background-color: $color-primary;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 2px rgba($color-beige, 0.15);
+  opacity: 0.9;
+  z-index: 2;
+  cursor: auto;
+  padding: 0.2rem 0.5rem;
+  @include md {
+    width: 50%;
+    top: 4rem;
+    left: 25%;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+  }
+  a, button {
+    color: $color-dark-gray;
+    background-color: $color-beige;
+    padding: 0.5rem;
+    @include md {
+      font-weight: 600;
+      &:hover {
+        background-color: $color-light-beige;
+      }
+    }
+    svg {
+      vertical-align: middle;
+      display: none;
+      @include md {
+        display: inline-block;
+      }
     }
   }
 }

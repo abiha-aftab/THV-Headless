@@ -3,8 +3,7 @@ import '../../assets/scss/main.scss'
 import FooterDefault from '../../containers/Footer/variants/FooterDefault'
 import NavbarDefault from '../../containers/Navbar/variants/NavbarDefault'
 import { useTheme } from '../../hooks/useTheme'
-import { fetchTranslation } from '../../utils/fetchTranslation'
-
+import ConfirmModal from '../Modal/variants/ConfirmModal'
 const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
   const { state, actions } = useTheme()
   const [languages, setLanguages] = useState([])
@@ -19,10 +18,9 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
         .then((results) => {
           const tmp = []
           results.languages?.forEach((language) => {
-            console.log(language)
-            const { codename } = language.system
+            const { name, codename } = language.system
             const url = codename === 'en' ? `/` : `/${codename}/`
-            tmp.push({ name: codename.toUpperCase(), url: url })
+            tmp.push({ name: codename.toUpperCase(), url: url, region: name })
           })
           setLanguages(tmp)
           actions.changeLanguages(tmp)
@@ -34,9 +32,29 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
 
   useEffect(() => {
     if (languageCode) {
-      let tmp = fetchTranslation(languageCode)
-      setTranslations(tmp)
-      actions.changeTranslations(tmp)
+      const tmp = []
+
+      async function fetchData() {
+        await fetch(
+          `${process.env.GATSBY_DELIVERY_API_URL}${process.env.GATSBY_KONTENT_PROJECT_ID}/items/translations?language=${languageCode}`
+        )
+          .then((response) => response.json())
+          .then((results) => {
+            let val = results.item.elements.translation.value.length
+            for (let i = 0; i < val; i++) {
+              const { elements, system } =
+                results.modular_content[Object.keys(results.modular_content)[i]]
+              tmp.push({
+                key: system.name,
+                value: elements.value.value,
+              })
+            }
+
+            setTranslations(tmp)
+            actions.changeTranslations(tmp)
+          })
+      }
+      fetchData()
     } else {
       setTranslations(state.translations)
     }
@@ -44,6 +62,7 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
   return (
     languages.length > 0 && (
       <>
+        <ConfirmModal languageCode={languageCode} />
         {navLinks !== undefined && (
           <NavbarDefault
             navLinks={navLinks}

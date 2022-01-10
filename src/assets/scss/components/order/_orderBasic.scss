@@ -5,13 +5,21 @@
   }
 
   &__image {
-    flex: 0 0 20rem;
-    max-height: 20rem;
+    display: none;
+    @include md {
+      display: block;
+      width: 33%;
+    }
+    height: auto;
   }
   &__body {
     padding: 2rem;
     flex: 1;
     position: relative;
+    margin-bottom: 2rem;
+    @include md {
+      margin-bottom: 0;
+    }
   }
   &:not(:last-child) {
     margin-bottom: 2rem;
@@ -21,13 +29,85 @@
     background: none;
     position: absolute;
     color: $color-slate;
-    top: 2rem;
+    top: unset;
+    bottom: 0;
     right: 2rem;
     font-size: 1.5rem;
     cursor: pointer;
     transition: $transition-default;
+    z-index: 2;
     &:hover {
       color: $color-crimson;
+    }
+    span {
+      display: inline-block;
+      font-size: $font-size-small;
+      font-weight: $font-weight-bold;
+      margin-right: 0.5rem;
+    }
+    svg {
+      vertical-align: middle;
+    }
+    @include md {
+      top: 2rem;
+      bottom: unset;
+      span {
+        display: none;
+      }
+    }
+  }
+  &__quantity {
+    position: relative;
+    bottom: 4rem;
+    margin-left: 2rem;
+    @include md {
+      position: unset;
+      bottom: unset;
+      left: unset;
+      margin-left: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &.title {
+      display: none;
+      @include md {
+        display: flex;
+      }
+    }
+  }
+}
+.btn-next {
+  height: auto;
+  width: auto;
+  max-width: 100%;
+  padding: 8px 8px 8px 16px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  line-height: 24px;
+  svg {
+    margin-left: 0.5rem;
+    vertical-align: text-top;
+  }
+  @include md {
+    &:hover {
+      background-color: $color-dark-gray;
+    }
+  }
+}
+@media (max-width: 320px) {
+  .orderBasic {
+    &__body {
+      padding: 1rem;
+      margin-bottom: 4rem;
+    }
+    &__quantity {
+      margin-left: 1rem;
+    }
+    &__remove {
+      bottom: -2rem;
+      right: 1rem;
     }
   }
 }

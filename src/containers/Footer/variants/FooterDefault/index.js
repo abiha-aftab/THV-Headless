@@ -5,8 +5,11 @@ import { MdEmail } from 'react-icons/md'
 import { prepareExternalLinks } from '../../../../utils/prepareExternalLinks'
 import ScrollToTop from './ScrollToTop'
 import NavLinks from './NavLinks'
+import { useLocation } from '@reach/router'
 
 const FooterDefault = ({ navLinks, footer }) => {
+  const { origin, pathname } = useLocation()
+  const path = `${origin}${pathname}`
   const { social_sharing__text, social_sharing__sources, external_links, disclaimer, copyright, address } = footer.elements
   if(external_links && external_links.value.length > 0) {
     navLinks = prepareExternalLinks(external_links.value, navLinks)
@@ -25,13 +28,20 @@ const FooterDefault = ({ navLinks, footer }) => {
               {
                 social_sharing__sources.value.map((source, key) => {
                   return (
-                    <a key={key} href={source.name} target="_blank" rel="noreferrer" className="icon">
-                      <span className="d-none">{source.codename}</span>
-                      {source.codename === 'facebook' && <RiFacebookCircleFill/>}
-                      {source.codename === 'twitter' && <RiTwitterFill/>}
-                      {source.codename === 'linkedin' && <RiLinkedinBoxFill/>}
-                      {source.codename === 'mail' && <MdEmail/>}
-                    </a>
+                    source.codename !== 'mail'
+                    ? (
+                      <button key={key} onClick={() => window.open(`${source.name}${path}`, '_blank', 'share')} rel="noreferrer" className="icon">
+                        <span className="d-none">{source.codename}</span>
+                        {source.codename === 'facebook' && <RiFacebookCircleFill/>}
+                        {source.codename === 'twitter' && <RiTwitterFill/>}
+                        {source.codename === 'linkedin' && <RiLinkedinBoxFill/>}
+                      </button>
+                    ) : (
+                      <a key={key} href={source.name} target="_blank" rel="noreferrer" className="icon">
+                        <span className="d-none">{source.codename}</span>
+                        {source.codename === 'mail' && <MdEmail/>}
+                      </a>
+                    )
                   )
                 })
               }

@@ -2,10 +2,10 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Video from '../Video'
 
-const Event = ({ url, title }) => {
+const Event = ({ url, title, thumbnail }) => {
   return (
     <article className="events__event">
-      <Video url={url} title={title} />
+      <Video url={url} title={title} thumbnail={thumbnail} />
       <p className="mb-0">
         <strong>{title}</strong>
       </p>

@@ -6,3 +6,20 @@
     height: 40rem;
   }
 }
+@media (max-width: 1024px) {
+  .intro {
+    .d-md-block {
+      display: none;
+    }
+    .col-md-7 {
+      grid-column: span 12;
+    }
+  }
+}
+@media (max-width: 420px) {
+  .intro {
+    .col-md-7 {
+      grid-column: unset;
+    }
+  }
+}

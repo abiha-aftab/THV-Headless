@@ -38,3 +38,27 @@
     width: 100%;
   }
 }
+@media (max-width: 420px) {
+  .steps {
+    justify-content: space-evenly;
+    &__step {
+      flex-direction: row;
+      margin-right: 5px;
+      .steps__title {
+        display: none;
+      }
+    }
+    &__step:last-child {
+      margin-right: unset;
+    }
+    &__step--active {
+      .steps__title {
+        display: flex;
+        margin: auto 1rem;
+      }
+    }
+    &__line {
+      display: none;
+    }
+  }
+}

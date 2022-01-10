@@ -15,6 +15,14 @@ const ThemeReducer = (state, action) => {
       return { ...state, languages: action.payload }
     case 'CHANGE_TRANSLATIONS':
       return { ...state, translations: action.payload }
+    case 'CHANGE_LANGUAGE':
+      console.log(action.payload)
+      if (action.payload)
+        localStorage.setItem('language', JSON.stringify(action.payload))
+      else {
+        localStorage.removeItem('language')
+      }
+      return { ...state, language: action.payload }
     default:
       return state
   }
@@ -25,6 +33,7 @@ export const ThemeProvider = ({ children }) => {
     orders: [],
     languages: [],
     translations: [],
+    language: null,
   })
 
   const actions = {
@@ -42,6 +51,9 @@ export const ThemeProvider = ({ children }) => {
     },
     changeTranslations: (translations) => {
       dispatch({ type: 'CHANGE_TRANSLATIONS', payload: translations })
+    },
+    changeLanguage: (language) => {
+      dispatch({ type: 'CHANGE_LANGUAGE', payload: language })
     },
   }
 

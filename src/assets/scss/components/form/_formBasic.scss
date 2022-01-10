@@ -3,6 +3,12 @@
   display: flex;
 }
 
+.mktoForm .mktoRadioList > label,
+.mktoForm .mktoCheckboxList > label {
+  margin-left: 1.4em !important;
+  margin-top: 0em !important;
+}
+
 #mktoForm_13727 {
   display: block;
 }
@@ -44,10 +50,8 @@ h5.newsletter-thanks-message {
   width: 0;
 }
 
-#confirmnewsletterform[style*='visibility: visible'] {
+#confirmnewsletterform {
   height: auto !important;
-  margin-top: 40px !important;
-  margin-bottom: 50px;
 }
 
 .stayInformedForm .mktoForm .mktoFormRow:nth-of-type(-n + 3) {
@@ -181,6 +185,7 @@ div#teconsent img {
 .mktoForm .mktoFormRow select.mktoField {
   padding: 7px 20px !important;
   background-color: #fff;
+  color: $color-slate;
 }
 
 .mktoForm .mktoFieldWrap {

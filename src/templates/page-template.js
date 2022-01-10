@@ -1,29 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect, Suspense, lazy } from 'react'
 import { graphql, Link } from 'gatsby'
 import Intro from '../containers/Intro'
 import References from '../components/References'
-import Resources from '../containers/Resources'
-import DynamicZone from '../containers/DynamicZone'
 import Layout from '../components/Layout'
 import { prepareNavLinks } from '../utils/prepareNavLinks'
-import { prepareTranslations } from '../utils/prepareTranslations'
 import Steps from '../components/Steps'
-import Orders from '../containers/Orders'
-import FormCheckout from '../components/Form/variants/FormCheckout'
-import OrderCheckout from '../components/Order/variants/OrderCheckout'
 import { FaChevronRight } from 'react-icons/fa'
 import { useTheme } from '../hooks/useTheme'
+import { prepareTranslations } from '../utils/prepareTranslations'
+import { getTitleForGermanyHomePage } from '../utils/helpers'
+import SEO from '../components/SEO'
+// import { SITE_TITLE } from '../utils/constants'
+import { SITE_TITLE } from '../utils/constants'
+const DynamicZone = lazy(() => import('../containers/DynamicZone'))
+const Resources = lazy(() => import('../containers/Resources'))
+const Orders = lazy(() => import('../containers/Orders'))
+const FormCheckout = lazy(() => import('../components/Form/variants/FormCheckout'))
+const OrderCheckout = lazy(() => import('../components/Order/variants/OrderCheckout'))
 
 export default function PageTemplate({
   pageContext: { languageCode, pageID, pageTitle, codename },
   data,
 }) {
   const { state } = useTheme()
+  const [checkoutStep, setCheckoutStep] = useState(2)
+
+  const handleChangeCheckoutStep = (step) => {
+    setCheckoutStep(step)
+  }
+
+  let translatedItemCheckout = ''
+  if (state.translations.length) {
+    let key = 'Checkout'
+    translatedItemCheckout = prepareTranslations(state.translations, key)
+  }
+
   const basketCodenames = ['basket', 'warenkorb']
+  const pagesWithTitle = [...basketCodenames, 'checkout', 'thank_you']
   const {
     pages,
     page: {
       elements: {
+        social_sharing__label: { value: socialLabel },
+        social_sharing__text: { value: socialText },
+        social_sharing__sources: { value: socialSources },
         intro: { value: intro },
         references: { value: references },
         body: { value: sections },
@@ -32,57 +52,99 @@ export default function PageTemplate({
     },
     footer,
   } = data
-  const navLinks = prepareNavLinks(pages, languageCode)
-
-  let key = 'Basket'
-  let translatedItems
-  if (state.translations.length) {
-    translatedItems = prepareTranslations(state.translations, key)
+  const socialSharing = {
+    label: socialLabel,
+    text: socialText,
+    sources: socialSources,
   }
+
+  // const [title, setTitle] = useState(null)
+  // useEffect(() => {
+  //   const language = getSelectedLanguage(state)
+  //   setTitle(`${pageTitle} - ${SITE_TITLE} ${language.region}`)
+  // }, [])
+
+  const navLinks = prepareNavLinks(pages, languageCode)
   return (
     <Layout languageCode={languageCode} navLinks={navLinks} footerData={footer}>
-      {(basketCodenames.indexOf(codename) !== -1 ||
-        codename.indexOf('checkout') !== -1) && (
+      {pageTitle && <SEO title={getTitleForGermanyHomePage(languageCode, pageTitle)} />}
+      {pagesWithTitle.indexOf(codename) !== -1 && (
         <section className="section pb-0 container">
           <h1>{pageTitle}</h1>
         </section>
       )}
-      {intro.length !== 0 && <Intro data={intro} />}
-      {sections.length !== 0 && <DynamicZone data={sections} />}
+      {intro.length !== 0 && (
+        <Intro data={intro} socialSharing={socialSharing} />
+      )}
+      {sections.length !== 0 && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <DynamicZone
+            data={sections}
+            socialSharing={intro.length === 0 ? socialSharing : null}
+            languageCode={languageCode}
+          />
+        </Suspense>
+      )}
       {references.length !== 0 && <References data={references} />}
-      {resources.length !== 0 && <Resources data={resources} />}
+      {resources.length !== 0 && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Resources data={resources} languageCode={languageCode} />
+        </Suspense>
+      )}
       {basketCodenames.indexOf(codename) !== -1 && (
         <>
           <Steps step={1} />
-          <Orders languageCode={languageCode} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Orders languageCode={languageCode} />
+          </Suspense>
         </>
       )}
       {codename.indexOf('checkout') !== -1 && (
         <>
-          <Steps step={2} />
+          <Steps step={checkoutStep} />
           <section className="section">
             <div className="container">
               <div className="grid-md-12">
                 <div className="col-md-8">
-                  <h3>Delivery details</h3>
-                  <FormCheckout />
+                  <h3>
+                    {translatedItemCheckout?.DeliveryTitle
+                      ? translatedItemCheckout?.DeliveryTitle
+                      : 'Delivery details'}
+                  </h3>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <FormCheckout step={checkoutStep} changeCheckoutStep={handleChangeCheckoutStep} languageCode={languageCode} />
+                  </Suspense>
                 </div>
                 <div className="col-md-4">
-                  <h3>My order(s)</h3>
+                  <h3>
+                    {translatedItemCheckout?.Orders
+                      ? translatedItemCheckout?.Orders
+                      : 'My order(s)'}
+                  </h3>
                   <strong>
                     <Link
                       className="btn-ghost"
                       to={
                         languageCode === 'en'
-                          ? `/${translatedItems.Title}`
+                          ? `/basket`
                           : `/${languageCode}/warenkorb`
                       }
+                      onClick={() => { handleChangeCheckoutStep(1) }}
                     >
-                      Edit selection <FaChevronRight className="ml-50" />
+                      {translatedItemCheckout?.Edit
+                        ? translatedItemCheckout?.Edit
+                        : 'Edit Selection'}
+                      <FaChevronRight className="ml-50" />
                     </Link>
                   </strong>
                   {state.orders.map((order) => {
-                    return <OrderCheckout key={order.id} data={order} />
+                    return (
+                      order.locale === languageCode && (
+                        <Suspense fallback={<div>Loading...</div>}>
+                          <OrderCheckout key={order.id} data={order} />
+                        </Suspense>
+                      )
+                    )
                   })}
                 </div>
               </div>
@@ -110,6 +172,18 @@ export const query = graphql`
       system: { id: { eq: $pageID }, language: { eq: $languageCode } }
     ) {
       elements {
+        social_sharing__label {
+          value
+        }
+        social_sharing__text {
+          value
+        }
+        social_sharing__sources {
+          value {
+            codename
+            name
+          }
+        }
         intro {
           value {
             ...intro

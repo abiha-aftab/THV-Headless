@@ -72,6 +72,15 @@
       }
     }
   }
+  &__footnote {
+    margin-top: 3rem;
+    margin-left: 15%;
+    margin-right: 23%;
+    sup {
+      font-size: $font-size-x-small;
+      line-height: line-height($font-size-small);
+    }
+  }
 }
 @media screen and (max-width: 1024px) {
   .grading {
@@ -83,6 +92,10 @@
       margin-right: auto !important;
       margin-left: auto !important;
       table-layout: fixed;
+    }
+    &__footnote {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 }

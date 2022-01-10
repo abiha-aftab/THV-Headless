@@ -8,10 +8,12 @@ import NavTop from './NavTop'
 import { useTheme } from '../../../../hooks/useTheme'
 
 const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
-  const { actions } = useTheme()
+  const { state, actions } = useTheme()
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [mobile, setMobile] = useState(false)
   const [headerClass, setHeaderClass] = useState('')
+  const [orders, setOrders] = useState([])
+  const [count, setCount] = useState(0)
 
   const toggleMobile = () => {
     setMobile(!mobile)
@@ -38,6 +40,17 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
+  useEffect(() => {
+    const tmpOrders = state.orders.filter((order) => {
+      return order.locale === languageCode
+    })
+    setOrders(tmpOrders)
+    setCount(
+      tmpOrders.reduce((acc, val) => {
+        return acc + val.count
+      }, 0)
+    )
+  }, [state.orders])
   return (
     <nav className={`navbarDefault${!mobile ? headerClass : ''}`} role="navigation">
       <div className="navbarDefault__container">
@@ -47,15 +60,17 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
             :
             <>
               <NavTop languageCode={languageCode} languages={languages} />
-              <Link to="/">
+              <Link to={languageCode === "en" ? `/` : `/${languageCode}/`}>
                 <img
                   src={logo}
                   className="navbarDefault__logo"
-                  alt={'YourHeartvalve logo'}
+                  alt={'Treat HF valve'}
                 />
               </Link>
             </>
           }
+          <div className="navbarDefault__toggle-contain">
+          {!mobile && <Link to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`} className="navbarDefault__cart-mobile"><RiShoppingBasketLine/><span className="quantity">{count}</span></Link>}
           <button
             className="navbarDefault__toggle"
             onClick={toggleMobile}
@@ -63,15 +78,18 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
           >
             {mobile
               ? <FiX />
-              : <><RiShoppingBasketLine /><FiMenu /></>
+              : <FiMenu />
             }
           </button>
+          </div>
         </div>
         <Nav
           navLinks={navLinks}
           mobile={mobile}
           activeDropdown={activeDropdown}
           setActiveDropdown={setActiveDropdown}
+          languageCode={languageCode}
+          languages={languages}
         />
       </div>
     </nav>

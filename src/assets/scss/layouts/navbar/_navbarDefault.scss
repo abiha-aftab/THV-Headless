@@ -50,13 +50,14 @@
         padding: 0 1rem;
         ul {
           li {
+            margin-left: 0;
             button {
               border: none;
               background-color: inherit;
               font-size: inherit;
               font-weight: 600;
             }
-            display: inline;
+            display: inline-block;
             padding-right: 1rem;
             font-weight: 600;
             svg {
@@ -98,13 +99,13 @@
             .basket-items {
               position: absolute;
               right: 0;
-              top: 12px;
+              top: 22px;
               width: 15rem;
               padding: 1rem;
               color: $color-white;
               background-color: $color-dark-gray;
               border-radius: 5px;
-              z-index: 1;
+              z-index: 3;
               p {
                 color: $color-white;
                 font-weight: normal;
@@ -161,15 +162,15 @@
             .language-container {
               border-radius: 5px;
               position: absolute;
-              right: 15px;
-              top: 12px;
+              right: 0;
+              top: 22px;
               color: $color-white;
               background-color: $color-dark-gray;
               z-index: 1;
-              width: 3rem;
-              text-align: center;
+              width: 4.2rem;
+              text-align: left;
+              padding: 10px;
               .language {
-                font-weight: normal;
                 font-size: 0.8rem;
                 width: 100%;
                 display: block;
@@ -177,10 +178,13 @@
                 color: $color-white;
                 text-decoration: none;
                 font-weight: 600;
-                @include md {
-                  &:hover {
-                    border-radius: 5px;
-                    background-color: $color-white;
+              }
+              @include md {
+                &:hover {
+                  border-radius: 5px;
+                  background-color: $color-white;
+                  color: $color-dark-gray;
+                  .language {
                     color: $color-dark-gray;
                   }
                 }
@@ -267,7 +271,7 @@
         width: 100%;
         padding-left: 2rem;
         &--active {
-          border-left: 2px solid $color-crimson;
+          border-left: 4px solid $color-crimson;
           background-color: $color-white;
         }
       }
@@ -276,6 +280,27 @@
       display: flex;
       flex-direction: row;
       align-self: flex-end;
+    }
+    &-language-selector {
+      button {
+        border: unset;
+        text-align: left;
+        font-size: inherit;
+        svg {
+          fill: $color-white;
+          vertical-align: middle;
+          font-size: 1.2rem;
+          float: right;
+          margin-right: 2rem;
+        }
+      }
+    }
+    &-language {
+      margin: 0 1rem;
+      background-color: $color-primary;
+      &-link {
+        padding-left: 1rem;
+      }
     }
   }
   &__nav-link {
@@ -302,17 +327,60 @@
         }
       }
     }
+    &.language-link {
+      padding-left: 1rem;
+    }
   }
   &__nav-item {
     position: relative;
+    margin-left: 0;
   }
   &__search-box {
-    width: 210px;
-    border: 1px solid #FFFFFF;
+    width: 13.125rem;
+    border: 0.0625rem solid $color-black;
     box-sizing: border-box;
-    border-radius: 5px;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 0.3125rem;
+    height: 1.55rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    background: transparent;
+    &:focus-visible {
+      outline: $color-dark-gray;
+    }
+  }
+  &__toggle-contain {
+    display: flex;
+  }
+  &__cart-mobile {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  .navbarDefault {
+    &__cart-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        height: 2rem;
+        width: 2rem;
+        fill: $color-dark-gray;
+      }
+      .quantity {
+        position: relative;
+        right: 10px;
+        bottom: 12px;
+        width: 16px;
+        text-align: center;
+        background-color: $color-crimson;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+        color: #fff;
+        display: block;
+        font-size: 10px;
+        height: 16px;
+        line-height: 16px;
+      }
+    }
   }
 }

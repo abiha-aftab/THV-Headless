@@ -19,6 +19,7 @@ const NavLinks = ({ navLinks }) => {
             </li>
           )
       })}
+      <li className="footerDefault__navigation-link-item" key="teconsent"><div id="teconsent"></div></li>
     </ul>
   )
 }

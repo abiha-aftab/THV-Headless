@@ -10,14 +10,15 @@ const Table = ({ data }) => {
       value: [{ codename: variant }],
     },
     table: { value: table },
+    footnote: { value: footnote },
   } = data
   switch (variant) {
     case 'grading':
-      return <TableGrading data={table} />
+      return <TableGrading data={table} footnote={footnote} />
     case 'basic':
-      return <TableBasic data={table} />
+      return <TableBasic data={table} footnote={footnote} />
     case 'hoverable':
-      return <TableHoverable data={table} />
+      return <TableHoverable data={table} footnote={footnote} />
     default:
       return null
   }
@@ -35,6 +36,9 @@ export const query = graphql`
         }
       }
       table {
+        value
+      }
+      footnote {
         value
       }
     }

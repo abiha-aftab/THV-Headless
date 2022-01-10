@@ -12,7 +12,7 @@ const References = ({ data }) => {
   ] = data
 
   return (
-    <div className="container section">
+    <div className="container section references">
       <RichTextElement value={references} />
     </div>
   )

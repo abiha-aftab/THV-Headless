@@ -1,8 +1,10 @@
 .basic {
   table {
     border-spacing: 4px;
-    width: 88%;
+    width: 100%;
     table-layout: fixed;
+    margin-right: auto;
+    margin-left: auto;
 
     tbody {
       > tr {
@@ -29,6 +31,20 @@
       }
     }
   }
+  &__footnote {
+    margin-top: 3rem;
+    margin-left: 10%;
+    margin-right: 12%;
+    sup {
+      font-size: $font-size-x-small;
+      line-height: line-height($font-size-small);
+    }
+  }
+
+  p {
+    margin-top: $spacer * 5;
+    margin-bottom: $spacer * 2;
+  }
 }
 @media screen and (max-width: 1024px) {
   .basic {
@@ -36,7 +52,8 @@
       border-spacing: 4px;
       width: 88%;
       table-layout: fixed;
-
+      margin-right: auto;
+      margin-left: auto;
       tbody {
         > tr {
           &:first-child {
@@ -53,6 +70,10 @@
           }
         }
       }
+    }
+    &__footnote {
+      margin-left: 10%;
+      margin-right: 12%;
     }
   }
 }

@@ -2,7 +2,7 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import Resource from '../../components/Resource'
 
-const Resources = ({ data }) => {
+const Resources = ({ data, languageCode = 'en' }) => {
   const [
     {
       elements: {
@@ -15,7 +15,7 @@ const Resources = ({ data }) => {
       <div className="container gap-2 grid-1 grid-md-3">
         {resources.map((resource) => {
           const { id, elements } = resource
-          return <Resource key={id} data={elements} id={id} />
+          return <Resource key={id} data={elements} id={id} languageCode={languageCode} />
         })}
       </div>
     </section>

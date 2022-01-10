@@ -17,6 +17,11 @@
     padding-right: 0;
     margin-left: calc(50vw - $max-width-container / 2);
   }
+  word-break: break-word;
+  -ms-hyphens: manual;
+  -moz-hyphens: manual;
+  -webkit-hyphens: manual;
+  hyphens: manual;
 }
 
 .container-left {

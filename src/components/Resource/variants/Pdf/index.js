@@ -1,10 +1,21 @@
-import { graphql } from 'gatsby'
-import React from 'react'
+import { graphql, Link } from 'gatsby'
+import React, { useState } from 'react'
 import Image from '../../../Image'
 import { BsDownload, BsCart } from 'react-icons/bs'
+import { FaChevronRight } from 'react-icons/fa'
 import { useTheme } from '../../../../hooks/useTheme'
+import PDFViewer from '../../../PDFViewer'
+import { prepareTranslations } from '../../../../utils/prepareTranslations'
 
-const Pdf = ({ title, description, name, media, price, id }) => {
+const Pdf = ({
+  title,
+  description,
+  name,
+  media,
+  price,
+  id,
+  languageCode = 'en',
+}) => {
   const {
     media: {
       value: [
@@ -22,6 +33,10 @@ const Pdf = ({ title, description, name, media, price, id }) => {
       value: [{ url }],
     },
   } = media
+
+  const [showBanner, setShowBanner] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+
   const { state, actions } = useTheme()
   const updateOrders = () => {
     const order = {
@@ -29,15 +44,52 @@ const Pdf = ({ title, description, name, media, price, id }) => {
       description,
       id,
       image,
+      locale: languageCode,
     }
     actions.changeOrders([...state.orders, order])
+    setShowBanner(true)
+    setTimeout(() => {
+      setShowBanner(false)
+    }, 5000)
   }
+
+  let translatedItemCheckout = ''
+  if (state.translations.length) {
+    let key = 'Checkout'
+    translatedItemCheckout = prepareTranslations(state.translations, key)
+  }
+
   return (
     <article className="resource">
-      <Image image={image} layout="fullWidth" alt={alt} />
+      {showBanner && (
+        <div className=" order-banner">
+          <span>
+            "{title}"
+            {translatedItemCheckout?.AddedToCart
+              ? translatedItemCheckout?.AddedToCart
+              : ' has been added to your cart!'}
+          </span>
+          <Link
+            to={
+              languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`
+            }
+            className="btn"
+          >
+            {translatedItemCheckout?.ViewBasket
+              ? translatedItemCheckout?.ViewBasket
+              : 'View Basket'}
+            <FaChevronRight />
+          </Link>
+        </div>
+      )}
+      <div className="resource__image" onClick={() => setShowModal(true)}>
+        <Image image={image} layout="fullWidth" alt={alt} />
+      </div>
       <div className="resource__body">
         <div className="resource__type">{name}</div>
-        <h4>{title}</h4>
+        <h4 className="resource__title" onClick={() => setShowModal(true)}>
+          {title}
+        </h4>
         {description}
       </div>
       <div className="resource__footer">
@@ -50,6 +102,17 @@ const Pdf = ({ title, description, name, media, price, id }) => {
         >
           <BsDownload /> Download
         </a>
+        {url && (
+          <PDFViewer
+            showModal={showModal}
+            setShowModal={setShowModal}
+            modalData={{ title, description, url, image, price }}
+            trigger={
+              'This information is not a substitute for talking with your doctor.'
+            }
+            languageCode={languageCode}
+          />
+        )}
         {price.length !== 0 && (
           <button className="resource__purchase" onClick={updateOrders}>
             <BsCart /> Free

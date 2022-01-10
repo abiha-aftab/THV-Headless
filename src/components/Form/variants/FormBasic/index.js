@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react'
+import { prepareTranslations } from '../../../../utils/prepareTranslations'
+import { useTheme } from '../../../../hooks/useTheme'
+import { navigate } from 'gatsby'
 
 const marketoScriptId = 'mktoForms'
 
 export default function FormBasic({ id }) {
+  const { state, actions } = useTheme()
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isFormVisible, setIsVisible] = useState(true)
+
+  let translatedItemThankyouMessage = ''
+  if (state.translations.length) {
+    let key = 'FormSubmission'
+    translatedItemThankyouMessage = prepareTranslations(state.translations, key)
+  }
 
   useEffect(() => {
     if (!document.getElementById(marketoScriptId)) {
@@ -15,8 +26,18 @@ export default function FormBasic({ id }) {
 
   useEffect(() => {
     isLoaded &&
-      window.MktoForms2.loadForm('//info.edwards.com', '769-NOZ-917', id)
-  }, [isLoaded, id])
+      window.MktoForms2.loadForm(
+        '//info.edwards.com',
+        '769-NOZ-917',
+        id,
+        function (form) {
+          form.onSuccess(function (values, followUpUrl) {
+            setIsVisible(false)
+            return false
+          })
+        }
+      )
+  }, [isLoaded, id, isFormVisible])
 
   const loadScript = () => {
     let s = document.createElement('script')
@@ -33,5 +54,21 @@ export default function FormBasic({ id }) {
     document.getElementsByTagName('head')[0].appendChild(s)
   }
 
-  return <form id={`mktoForm_${id}`}></form>
+  return isFormVisible ? (
+    <>
+      <form id={`mktoForm_${id}`}></form>
+    </>
+  ) : (
+    <>
+      <div id="confirmnewsletterform">
+        <h3 className="newsletter-thanks-message">
+          {translatedItemThankyouMessage.thankyou ?? 'Thank you!'}
+        </h3>
+        <p>
+          {translatedItemThankyouMessage.message ??
+            'For signing up to the monthly Edwards Lifesciences newsletter. You will now receive emails on the latest developments and industry insights on mitral and tricuspid regurgitation.'}
+        </p>
+      </div>
+    </>
+  )
 }

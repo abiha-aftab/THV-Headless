@@ -26,8 +26,10 @@
     border-radius: $btn-border-radius;
     transition: $transition-default;
     cursor: pointer;
-    &:hover {
-      background: $color-crimson;
+    @include md {
+      &:hover {
+        background: $color-crimson;
+      }
     }
   }
 }

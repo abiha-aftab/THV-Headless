@@ -1,0 +1,29 @@
+.references {
+  padding-top: 0;
+  p {
+    font-size: $font-size-small;
+  }
+  a {
+    color: $color-dark-gray;
+    text-decoration: underline;
+    &:hover {
+      color: $color-crimson;
+    }
+  }
+  ol {
+    list-style: none;
+    counter-reset: item;
+    li {
+      display: block;
+      margin-left: 1.7em;
+      font-size: $font-size-small;
+      word-break: break-all;
+      &:before {
+        content: counter(item) ". ";
+        counter-increment: item;
+        position: absolute;
+        margin-left: -1.7em;
+      }
+    }
+  }
+}

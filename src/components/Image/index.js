@@ -1,11 +1,12 @@
 import React from 'react'
 import { ImageElement } from '@kentico/gatsby-kontent-components'
 import { graphql } from 'gatsby'
+import LazyImg from './lazy-load'
 
 const Image = ({ image, className, layout = 'constrained', alt }) => {
   const { url } = image
   if (url.includes('.svg')) {
-    return <img className="fluid" src={url} alt={alt} />
+    return <LazyImg className="fluid" alt={alt} datasrc={url} />
   } else {
     return (
       <ImageElement

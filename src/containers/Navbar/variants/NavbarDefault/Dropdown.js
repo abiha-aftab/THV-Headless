@@ -5,14 +5,23 @@ import { RiArrowRightSLine } from 'react-icons/ri'
 import { Link } from 'gatsby'
 import { useTheme } from '../../../../hooks/useTheme'
 import { ImageElement } from '@kentico/gatsby-kontent-components'
+import { prepareTranslations } from '../../../../utils/prepareTranslations'
 
-export default function Dropdown({ type, title, languageCode = 'en', languages = [] }) {
+export default function Dropdown({
+  type,
+  title,
+  languageCode = 'en',
+  languages = [],
+}) {
+  const { state, actions } = useTheme()
   let [isOverButton, setIsOverButton] = useState(false)
   let [isOverList, setIsOverList] = useState(false)
   let [isOpen, setIsOpen] = useState()
   let [isTouchInput, setIsTouchInput] = useState()
   let [hasClicked, setHasClicked] = useState()
   let button = useRef(null)
+  const [orders, setOrders] = useState([])
+  const [count, setCount] = useState(0)
 
   useLayoutEffect(() => {
     if (isOpen && !isOverButton && !isOverList && !isTouchInput) {
@@ -25,15 +34,24 @@ export default function Dropdown({ type, title, languageCode = 'en', languages =
   }, [isOpen, isOverButton, isOverList, isTouchInput])
 
   useEffect(() => {
+    const tmpOrders = state.orders.filter((order) => {
+      return order.locale === languageCode
+    })
+    setOrders(tmpOrders)
+    setCount(
+      tmpOrders.reduce((acc, val) => {
+        return acc + val.count
+      }, 0)
+    )
     setIsTouchInput(false)
     setHasClicked(false)
-  }, [hasClicked])
+  }, [hasClicked, state.orders])
 
-  const { state } = useTheme()
-
-  const count = state.orders.reduce((acc, val) => {
-    return acc + val.count
-  }, 0)
+  let translatedItemBasket = ''
+  if (state.translations.length) {
+    let key = 'Basket'
+    translatedItemBasket = prepareTranslations(state.translations, key)
+  }
 
   return type === 'cart' ? (
     <li className="basket">
@@ -57,7 +75,9 @@ export default function Dropdown({ type, title, languageCode = 'en', languages =
         }}
       >
         <RiShoppingBasketLine />
-        <Link to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`}>
+        <Link
+          to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`}
+        >
           <span className="quantity">{count}</span> {title}
         </Link>
       </button>
@@ -71,16 +91,28 @@ export default function Dropdown({ type, title, languageCode = 'en', languages =
             setIsOverList(false)
           }}
         >
-          {state.orders.length === 0 ? (
+          {orders.length === 0 ? (
             <div className="empty">
               <RiShoppingBasketLine />
-              <p>Resource order</p>
-              <p>No resources have been added to the basket yet.</p>
+              <p>
+                {translatedItemBasket?.ResourceOrder
+                  ? translatedItemBasket?.ResourceOrder
+                  : 'Resources order'}
+              </p>
+              <p>
+                {translatedItemBasket?.EmptyBasket
+                  ? translatedItemBasket?.EmptyBasket
+                  : 'No resources have been added to the basket yet.'}
+              </p>
             </div>
           ) : (
             <div className="basket__items-contain">
-              <p>Resource order</p>
-              {state.orders.map((order, key) => {
+              <p>
+                {translatedItemBasket?.ResourceOrder
+                  ? translatedItemBasket?.ResourceOrder
+                  : 'Resources order'}
+              </p>
+              {orders.map((order, key) => {
                 return (
                   <div key={key} className="item">
                     <ImageElement
@@ -92,8 +124,18 @@ export default function Dropdown({ type, title, languageCode = 'en', languages =
                   </div>
                 )
               })}
-              <Link className="basket-link" to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`}>
-                Go to Basket <RiArrowRightSLine />
+              <Link
+                className="basket-link"
+                to={
+                  languageCode === 'en'
+                    ? '/basket'
+                    : `/${languageCode}/warenkorb`
+                }
+              >
+                {translatedItemBasket?.Link
+                  ? translatedItemBasket?.Link
+                  : 'Go to Basket'}{' '}
+                <RiArrowRightSLine />
               </Link>
             </div>
           )}
@@ -128,8 +170,17 @@ export default function Dropdown({ type, title, languageCode = 'en', languages =
           }}
         >
           {languages.map((language, key) => {
-            if(language.name.toLowerCase() !== languageCode.toLowerCase())
-              return <Link key={key} to={language.url} className="language">{language.name}</Link>
+            if (language.name.toLowerCase() !== languageCode.toLowerCase())
+              return (
+                <Link
+                  key={key}
+                  to={language.url}
+                  className="language"
+                  onClick={() => actions.changeLanguage(language)}
+                >
+                  {language.name}
+                </Link>
+              )
           })}
         </button>
       )}

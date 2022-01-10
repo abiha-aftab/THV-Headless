@@ -1,8 +1,9 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import Cta from '../../components/Cta'
+import { DEFAULT_LANGUAGE } from '../../utils/constants'
 
-const CallToAction = ({ data }) => {
+const CallToAction = ({ data, languageCode = DEFAULT_LANGUAGE }) => {
   const {
     title: { value: title },
     cta: {
@@ -17,9 +18,9 @@ const CallToAction = ({ data }) => {
     },
   } = data
   return (
-    <section className="container section">
-      <h2>{title}</h2>
-      <Cta link={link} text={text} />
+    <section className={`container section cta${title ? ' with-title' : ''}`}>
+      {title && (<h2 className="cta__title">{title}</h2>)}
+      <Cta link={link} text={text} languageCode={languageCode} />
     </section>
   )
 }

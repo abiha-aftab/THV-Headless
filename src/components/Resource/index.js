@@ -3,7 +3,7 @@ import React from 'react'
 import Model from './variants/Model'
 import Pdf from './variants/Pdf'
 
-const Resource = ({ data, id }) => {
+const Resource = ({ data, id, languageCode = 'en' }) => {
   const {
     title: { value: title },
     description: { value: description },
@@ -28,6 +28,7 @@ const Resource = ({ data, id }) => {
           name={name}
           media={media}
           price={price}
+          languageCode={languageCode}
         />
       )
     case 'pdf':
@@ -39,6 +40,7 @@ const Resource = ({ data, id }) => {
           name={name}
           media={media}
           price={price}
+          languageCode={languageCode}
         />
       )
     default:
