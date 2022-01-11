@@ -23,6 +23,8 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
           />
         )}
         <RichTextElement
+          data-kontent-item-id={id}
+          data-kontent-element-codename={code}
           value={content}
           linkedItems={modular_content}
           resolveLinkedItem={(linkedItem) =>
