@@ -8,11 +8,16 @@ const References = ({ data }) => {
       elements: {
         references: { value: references },
       },
+      system: { id, codename },
     },
   ] = data
 
   return (
-    <div className="container section references">
+    <div
+      className="container section references"
+      data-kontent-item-id={id}
+      data-kontent-element-codename={codename}
+    >
       <RichTextElement value={references} />
     </div>
   )

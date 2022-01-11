@@ -54,6 +54,7 @@ export default function PageTemplate({
     },
     footer,
   } = data
+  console.log('references ', references)
   const socialSharing = {
     locale: languageCode,
     pageTitle: pageTitle,
@@ -203,6 +204,10 @@ export const query = graphql`
         references {
           value {
             ...references
+            system {
+              id
+              codename
+            }
           }
         }
         body {
