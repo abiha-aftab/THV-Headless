@@ -12,7 +12,7 @@ import { getSelectedLanguage } from '../utils/helpers'
 import { SITE_TITLE } from '../utils/constants'
 
 export default function EventsTemplate({
-  pageContext: { languageCode, pageID, pageTitle, codename },
+  pageContext: { languageCode, pageID, pageTitle, pageSlug, codename },
   data,
 }) {
   const {
@@ -22,6 +22,7 @@ export default function EventsTemplate({
         social_sharing__label: { value: socialLabel },
         social_sharing__text: { value: socialText },
         social_sharing__sources: { value: socialSources },
+        social_sharing__mailto: { value: mailto },
         title: { value: heading },
         events: { value: events },
         image: {
@@ -67,9 +68,13 @@ export default function EventsTemplate({
         <div className="col-md-7 mt-2 mt-md-5">
           {socialSources.length > 0 && (
             <SocialSharing
+              locale={languageCode}
+              pageTitle={pageTitle}
+              pageSlug={pageSlug}
               label={socialLabel}
               text={socialText}
               sources={socialSources}
+              mailto={mailto}
             />
           )}
           <h1>{heading}</h1>
@@ -132,6 +137,9 @@ export const query = graphql`
             name
           }
         }
+        social_sharing__mailto {
+          value
+        }
         marketo_form {
           value {
             ...marketoForm
@@ -166,6 +174,9 @@ export const query = graphql`
             codename
             name
           }
+        }
+        social_sharing__mailto {
+          value
         }
         external_links {
           value {

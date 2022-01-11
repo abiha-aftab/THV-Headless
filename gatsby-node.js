@@ -271,7 +271,7 @@ exports.createPages = async ({ actions, graphql }) => {
       createPage({
         path: path,
         component: require.resolve(`${pageTemplatePath}`),
-        context: { languageCode: language, pageID, pageTitle, codename },
+        context: { languageCode: language, pageID, pageTitle, pageSlug, codename },
       })
       if (process.env.ENVIRONMENT === 'development') {
         const spotlightlightslug = page.elements.url

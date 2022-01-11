@@ -5,9 +5,9 @@
   }
 
   &__image {
-    display: none;
+    display: none !important;
     @include md {
-      display: block;
+      display: block !important;
       width: 33%;
     }
     height: auto;

@@ -36,7 +36,7 @@ const siteMapTemplate = ({ pageContext: { languageCode, path }, data }) => {
   return (
     <Layout languageCode={languageCode} navLinks={navLinks} footerData={footer}>
       <SEO title={`Sitemap - ${getTitlePart(languageCode)}`} />
-      <div className="section">
+      <div className="section pt-5">
         <div className="container">
           <div className="siteMap">
             <div>
@@ -127,6 +127,9 @@ query siteMapQuery($languageCode: String) {
           codename
           name
         }
+      }
+      social_sharing__mailto {
+        value
       }
       external_links {
         value {

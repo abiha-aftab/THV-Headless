@@ -75,11 +75,9 @@ export default function Dropdown({
         }}
       >
         <RiShoppingBasketLine />
-        <Link
-          to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`}
-        >
+        <div className="basket__title">
           <span className="quantity">{count}</span> {title}
-        </Link>
+        </div>
       </button>
       {isOpen && (
         <button
@@ -155,6 +153,13 @@ export default function Dropdown({
         onMouseLeave={(event) => {
           setIsOverButton(false)
         }}
+        onClick={() => {
+          setHasClicked(true)
+          setIsOpen(!isOpen)
+        }}
+        onKeyDown={() => {
+          setIsOpen(!isOpen)
+        }}
       >
         {title}
         <FaCaretDown />
@@ -172,14 +177,16 @@ export default function Dropdown({
           {languages.map((language, key) => {
             if (language.name.toLowerCase() !== languageCode.toLowerCase())
               return (
-                <Link
+                <a
+                  target="_blank"
+                  rel="noreferrer"
                   key={key}
-                  to={language.url}
+                  href={language.url}
                   className="language"
                   onClick={() => actions.changeLanguage(language)}
                 >
                   {language.name}
-                </Link>
+                </a>
               )
           })}
         </button>

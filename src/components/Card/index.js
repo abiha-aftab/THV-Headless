@@ -4,14 +4,24 @@ import { graphql } from 'gatsby'
 import Image from '../Image'
 import Video from '../Video'
 import { FaChevronRight } from 'react-icons/fa'
+import { useTheme } from '../../hooks/useTheme'
+import { prepareTranslations } from '../../utils/prepareTranslations'
 
-const Card = ({ data, system }) => {
+const Card = ({ data }) => {
+  const { state } = useTheme()
   const {
     title: { value: title },
     media: { value: media },
     details: { value: details },
   } = data
+
   const { id, codename } = system
+  let translatedItemCard = ''
+  if (state.translations.length) {
+    let key = 'Cards'
+    translatedItemCard = prepareTranslations(state.translations, key)
+  }
+
   return (
     <div
       className="card"
@@ -44,7 +54,7 @@ const Card = ({ data, system }) => {
                     <div className="card__video-footer-watch-now">
                       <a href={`https://youtu.be/${video_id}`} target="_blank">
                         {' '}
-                        Watch now{' '}
+                        {translatedItemCard?.Link}{' '}
                       </a>
                       <FaChevronRight />
                     </div>

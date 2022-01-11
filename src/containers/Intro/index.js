@@ -5,7 +5,8 @@ import Image from '../../components/Image'
 import SocialSharing from '../SocialSharing'
 
 const Intro = ({ data, socialSharing }) => {
-  const { label, text, sources } = socialSharing
+  const { locale, pageTitle, pageSlug, label, text, sources, mailto } =
+    socialSharing
   const [
     {
       elements: {
@@ -38,7 +39,15 @@ const Intro = ({ data, socialSharing }) => {
         data-kontent-element-codename={codename}
       >
         {sources.length > 0 && (
-          <SocialSharing label={label} text={text} sources={sources} />
+          <SocialSharing
+            locale={locale}
+            pageTitle={pageTitle}
+            pageSlug={pageSlug}
+            label={label}
+            text={text}
+            sources={sources}
+            mailto={mailto}
+          />
         )}
         <h1>{title}</h1>
         <h2>{subtitle}</h2>

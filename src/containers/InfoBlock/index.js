@@ -22,9 +22,13 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
       >
         {socialSharing && socialSharing.sources.length > 0 && (
           <SocialSharing
+            locale={socialSharing.locale}
+            pageTitle={socialSharing.pageTitle}
+            pageSlug={socialSharing.pageSlug}
             label={socialSharing.label}
             text={socialSharing.text}
             sources={socialSharing.sources}
+            mailto={socialSharing.mailto}
           />
         )}
         <RichTextElement

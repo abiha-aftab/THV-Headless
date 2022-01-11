@@ -45,6 +45,7 @@ const Video = ({ url, title, thumbnail = [], id, code }) => {
               alt={`${title} video thumbnail`}
             />
           )}
+          <span className="icon-bg-white"></span>
           <button onClick={handleShowVideo} className="video__wrapper-btn">
             <FaYoutube />
           </button>

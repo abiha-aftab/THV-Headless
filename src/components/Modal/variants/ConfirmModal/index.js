@@ -18,13 +18,13 @@ const ConfirmModal = ({ languageCode = DEFAULT_LANGUAGE }) => {
   useDisableBodyScroll(showModal)
 
   useEffect(() => {
-    const isConfirm = !!localStorage.getItem("isConfirm");
+    const isConfirm = !!localStorage.getItem(`isConfirm_${languageCode}`);
     if(!isConfirm)
       setShowModal(true)
   })
 
   const handleConfirm = () => {
-    localStorage.setItem('isConfirm', "true")
+    localStorage.setItem(`isConfirm_${languageCode}`, "true")
     setShowModal(false);
   }
 

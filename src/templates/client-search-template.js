@@ -47,7 +47,7 @@ export default function SearchTemplate({ pageContext, data }) {
   return (
     <Layout languageCode={languageCode} navLinks={navLinks} footerData={footer}>
       {pageTitle && <SEO title={pageTitle} />}
-      <div className="section">
+      <div className="section pt-5">
         <ClientSearch
           data={searchData.data}
           language={languageCode}
@@ -84,6 +84,9 @@ query searchPageQuery($languageCode: String) {
           codename
           name
         }
+      }
+      social_sharing__mailto {
+          value
       }
       external_links {
         value {

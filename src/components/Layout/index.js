@@ -4,7 +4,36 @@ import FooterDefault from '../../containers/Footer/variants/FooterDefault'
 import NavbarDefault from '../../containers/Navbar/variants/NavbarDefault'
 import { useTheme } from '../../hooks/useTheme'
 import ConfirmModal from '../Modal/variants/ConfirmModal'
+import { DEFAULT_LANGUAGE } from '../../utils/constants'
 import KontentSmartLink from '@kentico/kontent-smart-link'
+
+const checkPathNameAgainstLanguages = (tmp, actions) => {
+  // SET LANGUAGE BASED ON THE PATHNAME:
+  const pathName = window?.location?.pathname
+  if (pathName && tmp) {
+    const parts = pathName.split('/')
+    if (parts && parts.length > 0) {
+      let found = null
+      for (const part of parts) {
+        if (part) {
+          found = tmp.find((lang) => lang.name === part.toUpperCase())
+          if (found) {
+            actions.changeLanguage(found)
+            break
+          }
+        }
+      }
+      // DEFAULT CASE:
+      if (!found) {
+        const defaultLang = tmp.find(
+          (lang) => lang.name === DEFAULT_LANGUAGE.toUpperCase()
+        )
+        actions.changeLanguage(defaultLang)
+      }
+    }
+  }
+}
+
 const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
   const { state, actions } = useTheme()
   const [languages, setLanguages] = useState([])
@@ -36,6 +65,7 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
           })
           setLanguages(tmp)
           actions.changeLanguages(tmp)
+          checkPathNameAgainstLanguages(tmp, actions)
         })
     } else {
       setLanguages(state.languages)
@@ -43,9 +73,12 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
   }, [state.languages])
 
   useEffect(() => {
+    checkPathNameAgainstLanguages(state.languages, actions)
+  }, [])
+
+  useEffect(() => {
     if (languageCode) {
       const tmp = []
-
       async function fetchData() {
         await fetch(
           `${process.env.GATSBY_DELIVERY_API_URL}${process.env.GATSBY_KONTENT_PROJECT_ID}/items/translations?language=${languageCode}`
@@ -89,7 +122,11 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
         )}
         {children}
         {navLinks !== undefined && (
-          <FooterDefault navLinks={navLinks} footer={footerData} />
+          <FooterDefault
+            navLinks={navLinks}
+            footer={footerData}
+            languageCode={languageCode}
+          />
         )}
       </div>
     )

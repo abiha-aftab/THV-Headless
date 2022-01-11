@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Item from './Item'
-import { FaChevronRight, FaChevronDown, FaSearch } from 'react-icons/fa'
-import { Link, navigate } from 'gatsby'
+import { FaChevronLeft, FaChevronRight, FaSearch } from 'react-icons/fa'
+import { navigate } from 'gatsby'
 import { DEFAULT_LANGUAGE } from '../../../../utils/constants'
 import { useTheme } from '../../../../hooks/useTheme'
 
@@ -9,6 +9,10 @@ const Nav = ({ navLinks, mobile, languageCode = DEFAULT_LANGUAGE, languages = []
   const { actions } = useTheme()
   const searchRef = useRef(false)
   const [openLanguageSelector, setOpenLanguageSelector] = useState(false)
+  useEffect(() => {
+    if(!mobile)
+      setOpenLanguageSelector(false)
+  }, [mobile])
   return (
     <>
       {mobile &&
@@ -42,7 +46,7 @@ const Nav = ({ navLinks, mobile, languageCode = DEFAULT_LANGUAGE, languages = []
           : 'navbarDefault__nav'
       }
     >
-      {navLinks.map((link, index) => {
+      {!openLanguageSelector && navLinks.map((link, index) => {
         return <Item link={link} key={index} index={index} />
       })}
       {mobile && (
@@ -50,10 +54,10 @@ const Nav = ({ navLinks, mobile, languageCode = DEFAULT_LANGUAGE, languages = []
           <li className="navbarDefault__nav-language-selector">
             <button
               onClick={() => {setOpenLanguageSelector(!openLanguageSelector)}}
-              className="navbarDefault__nav-link"
+              className={`navbarDefault__nav-link${openLanguageSelector ? ' active' : ''}`}
             >
               {languageCode.toUpperCase()}
-              {openLanguageSelector ? <FaChevronDown/> : <FaChevronRight/>}
+              {openLanguageSelector ? <FaChevronLeft className="left"/> : <FaChevronRight className="right"/>}
             </button>
           </li>
           {openLanguageSelector && languages.length > 0 && (
@@ -61,7 +65,7 @@ const Nav = ({ navLinks, mobile, languageCode = DEFAULT_LANGUAGE, languages = []
               if (language.name.toLowerCase() !== languageCode.toLowerCase())
                 return (
                   <li key={key} className="navbarDefault__nav-language">
-                    <Link to={language.url} onClick={() => actions.changeLanguage(language)} className="navbarDefault__nav-link language-link">{language.name}</Link>
+                    <a target="_blank" rel="noreferrer" href={language.url} onClick={() => actions.changeLanguage(language)} className="navbarDefault__nav-link language-link">{language.name}</a>
                   </li>
                 )
             })

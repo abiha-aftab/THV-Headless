@@ -76,10 +76,12 @@
           }
           .basket {
             position: relative;
-            a {
+            &__title {
+              display: inline-block;
               color: $color-dark-gray;
               text-decoration: none;
               font-weight: 600;
+              margin-left: 0.5rem;
             }
             .quantity {
               position: absolute;
@@ -146,7 +148,8 @@
                   border: 1px solid $color-white;
                   padding: 10px;
                   font-weight: normal;
-                  font-size: 0.8rem;
+                  font-size: 0.9rem;
+                  text-decoration: none;
                   svg {
                     fill: $color-white;
                   }
@@ -262,7 +265,6 @@
       margin-left: -$spacer;
       margin-right: -$spacer;
       background: lighten($color-beige, 10%);
-      padding-bottom: 1rem;
       @include md {
         padding: $spacer;
         background: none;
@@ -282,6 +284,13 @@
       align-self: flex-end;
     }
     &-language-selector {
+      margin-left: 0;
+      .navbarDefault__nav-link {
+        &.active {
+          padding-left: 1rem;
+          color: $color-white;
+        }
+      }
       button {
         border: unset;
         text-align: left;
@@ -290,14 +299,21 @@
           fill: $color-white;
           vertical-align: middle;
           font-size: 1.2rem;
-          float: right;
-          margin-right: 2rem;
+          &.left {
+            float: left;
+            margin-right: 1rem;
+          }
+          &.right {
+            float: right;
+            margin-right: 2rem;
+          }
         }
       }
     }
     &-language {
-      margin: 0 1rem;
-      background-color: $color-primary;
+      padding: 0 1rem;
+      background-color: #BCCCD5;
+      margin-left: 0;
       &-link {
         padding-left: 1rem;
       }
@@ -336,11 +352,14 @@
     margin-left: 0;
   }
   &__search-box {
+    position: absolute;
+    top: -0.5rem;
+    right: 12rem;
     width: 13.125rem;
+    height: 2rem;
     border: 0.0625rem solid $color-black;
     box-sizing: border-box;
     border-radius: 0.3125rem;
-    height: 1.55rem;
     padding-left: 0.625rem;
     padding-right: 0.625rem;
     background: transparent;
@@ -361,6 +380,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      border: none;
+      background-color: transparent;
       svg {
         height: 2rem;
         width: 2rem;

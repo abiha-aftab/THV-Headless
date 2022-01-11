@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { graphql, Link } from 'gatsby'
 import Intro from '../containers/Intro'
 import References from '../components/References'
@@ -10,8 +10,6 @@ import { useTheme } from '../hooks/useTheme'
 import { prepareTranslations } from '../utils/prepareTranslations'
 import { getTitleForGermanyHomePage } from '../utils/helpers'
 import SEO from '../components/SEO'
-// import { SITE_TITLE } from '../utils/constants'
-import { SITE_TITLE } from '../utils/constants'
 const DynamicZone = lazy(() => import('../containers/DynamicZone'))
 const Resources = lazy(() => import('../containers/Resources'))
 const Orders = lazy(() => import('../containers/Orders'))
@@ -23,7 +21,7 @@ const OrderCheckout = lazy(() =>
 )
 
 export default function PageTemplate({
-  pageContext: { languageCode, pageID, pageTitle, codename },
+  pageContext: { languageCode, pageID, pageTitle, pageSlug, codename },
   data,
 }) {
   const { state } = useTheme()
@@ -47,6 +45,7 @@ export default function PageTemplate({
         social_sharing__label: { value: socialLabel },
         social_sharing__text: { value: socialText },
         social_sharing__sources: { value: socialSources },
+        social_sharing__mailto: { value: mailto },
         intro: { value: intro },
         references: { value: references },
         body: { value: sections },
@@ -56,16 +55,14 @@ export default function PageTemplate({
     footer,
   } = data
   const socialSharing = {
+    locale: languageCode,
+    pageTitle: pageTitle,
+    pageSlug: pageSlug,
     label: socialLabel,
     text: socialText,
     sources: socialSources,
+    mailto: mailto,
   }
-
-  // const [title, setTitle] = useState(null)
-  // useEffect(() => {
-  //   const language = getSelectedLanguage(state)
-  //   setTitle(`${pageTitle} - ${SITE_TITLE} ${language.region}`)
-  // }, [])
 
   const navLinks = prepareNavLinks(pages, languageCode)
   return (
@@ -74,7 +71,7 @@ export default function PageTemplate({
         <SEO title={getTitleForGermanyHomePage(languageCode, pageTitle)} />
       )}
       {pagesWithTitle.indexOf(codename) !== -1 && (
-        <section className="section pb-0 container">
+        <section className="section pt-5 pb-0 container">
           <h1>{pageTitle}</h1>
         </section>
       )}
@@ -195,6 +192,9 @@ export const query = graphql`
             name
           }
         }
+        social_sharing__mailto {
+          value
+        }
         intro {
           value {
             ...intro
@@ -238,6 +238,9 @@ export const query = graphql`
             codename
             name
           }
+        }
+        social_sharing__mailto {
+          value
         }
         external_links {
           value {

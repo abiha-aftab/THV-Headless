@@ -6,17 +6,22 @@ import { Link } from 'gatsby'
 import logo from '../../../../assets/images/edwards-logo.svg'
 import NavTop from './NavTop'
 import { useTheme } from '../../../../hooks/useTheme'
+import Basket from './Basket'
 
 const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
   const { state, actions } = useTheme()
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [mobile, setMobile] = useState(false)
   const [headerClass, setHeaderClass] = useState('')
-  const [orders, setOrders] = useState([])
   const [count, setCount] = useState(0)
+  const [basketMobile, setBasketMobile] = useState(false)
 
   const toggleMobile = () => {
     setMobile(!mobile)
+  }
+
+  const toggleBasketMobile = () => {
+    setBasketMobile(!basketMobile)
   }
 
   const isBrowser = () => typeof window !== "undefined"
@@ -44,7 +49,6 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
     const tmpOrders = state.orders.filter((order) => {
       return order.locale === languageCode
     })
-    setOrders(tmpOrders)
     setCount(
       tmpOrders.reduce((acc, val) => {
         return acc + val.count
@@ -70,7 +74,7 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
             </>
           }
           <div className="navbarDefault__toggle-contain">
-          {!mobile && <Link to={languageCode === 'en' ? '/basket' : `/${languageCode}/warenkorb`} className="navbarDefault__cart-mobile"><RiShoppingBasketLine/><span className="quantity">{count}</span></Link>}
+          {!mobile && <button onClick={toggleBasketMobile} className="navbarDefault__cart-mobile"><RiShoppingBasketLine/><span className="quantity">{count}</span></button>}
           <button
             className="navbarDefault__toggle"
             onClick={toggleMobile}
@@ -91,6 +95,7 @@ const NavbarDefault = ({ navLinks, languageCode = 'en', languages = [] }) => {
           languageCode={languageCode}
           languages={languages}
         />
+        {basketMobile && <Basket languageCode={languageCode} setBasketMobile={setBasketMobile} />}
       </div>
     </nav>
   )

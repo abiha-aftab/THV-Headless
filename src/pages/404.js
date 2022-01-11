@@ -24,8 +24,6 @@ export default function NotFound({ data }) {
     setSelectedLanguage(language.name);
   }, [])
 
-  console.log("SELECTED_LANGUAGE: ", selectedLanguage)
-
   const filteredPages = pages.nodes.filter((node) => node.system.language === selectedLanguage);
   const filteredFooter = footer.nodes.filter((node) => node.system.language === selectedLanguage);
   const navLinks = prepareNavLinks(filteredPages[0], selectedLanguage);
@@ -40,7 +38,7 @@ export default function NotFound({ data }) {
   return (
     <Layout languageCode={selectedLanguage} navLinks={navLinks} footerData={filteredFooter[0]}>
       <SEO title="Not Found" />
-      <div className="section">
+      <div className="section pt-5">
         <div className="container">
           <div className="siteMap">
             {nfTranslation && <div>
@@ -107,8 +105,12 @@ export const query = graphql`
           }
           social_sharing__sources {
             value {
+              codename
               name
             }
+          }
+          social_sharing__mailto {
+            value
           }
           social_sharing__text {
             value
