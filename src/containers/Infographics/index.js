@@ -3,6 +3,7 @@ import Infographic from '../../components/Infographic'
 import { graphql } from 'gatsby'
 
 const Infographics = ({ data }) => {
+  console.log('info data ', data)
   const {
     title: { value: title },
     infographics: { value: infographics },
@@ -11,8 +12,8 @@ const Infographics = ({ data }) => {
     <div className="infographics">
       {infographics &&
         infographics.map((infographic) => {
-          const { elements, id } = infographic
-          return <Infographic data={elements} key={id} />
+          const { elements, id, system } = infographic
+          return <Infographic data={elements} key={id} system={system} />
         })}
     </div>
   )
@@ -29,6 +30,10 @@ export const query = graphql`
       infographics {
         value {
           ...infographic
+          system {
+            id
+            codename
+          }
         }
       }
     }
