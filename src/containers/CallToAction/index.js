@@ -3,7 +3,12 @@ import React from 'react'
 import Cta from '../../components/Cta'
 import { DEFAULT_LANGUAGE } from '../../utils/constants'
 
-const CallToAction = ({ data, languageCode = DEFAULT_LANGUAGE }) => {
+const CallToAction = ({
+  data,
+  languageCode = DEFAULT_LANGUAGE,
+  id,
+  codename,
+}) => {
   const {
     title: { value: title },
     cta: {
@@ -18,8 +23,12 @@ const CallToAction = ({ data, languageCode = DEFAULT_LANGUAGE }) => {
     },
   } = data
   return (
-    <section className={`container section cta${title ? ' with-title' : ''}`}>
-      {title && (<h2 className="cta__title">{title}</h2>)}
+    <section
+      data-kontent-item-id={id}
+      data-kontent-element-codename={codename}
+      className={`container section cta${title ? ' with-title' : ''}`}
+    >
+      {title && <h2 className="cta__title">{title}</h2>}
       <Cta link={link} text={text} languageCode={languageCode} />
     </section>
   )
