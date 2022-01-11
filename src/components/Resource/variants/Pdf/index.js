@@ -15,6 +15,8 @@ const Pdf = ({
   price,
   id,
   languageCode = 'en',
+  contentId,
+  contentCodename,
 }) => {
   const {
     media: {
@@ -60,7 +62,11 @@ const Pdf = ({
   }
 
   return (
-    <article className="resource">
+    <article
+      className="resource"
+      data-kontent-item-id={contentId}
+      data-kontent-element-codename={contentCodename}
+    >
       {showBanner && (
         <div className=" order-banner">
           <span>

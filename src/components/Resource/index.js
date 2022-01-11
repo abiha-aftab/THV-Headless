@@ -43,6 +43,8 @@ const Resource = ({ data, id, languageCode = 'en', system }) => {
           media={media}
           price={price}
           languageCode={languageCode}
+          contentId={contentID}
+          contentCodename={contentCode}
         />
       )
     default:
