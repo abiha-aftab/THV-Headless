@@ -15,6 +15,7 @@ const Infographic = ({ data, system }) => {
             },
             image_alt: { value: alt },
           },
+          system: { id: contentId, codename: contentCodename },
         },
       ],
     },
@@ -30,7 +31,12 @@ const Infographic = ({ data, system }) => {
         data-kontent-element-codename={codename}
       >
         <RichTextElement value={title} />
-        <Image image={image} alt={alt} />
+        <Image
+          image={image}
+          alt={alt}
+          id={contentId}
+          codename={contentCodename}
+        />
         <RichTextElement value={footnote} />
       </div>
       <div className="infographics__item" />
