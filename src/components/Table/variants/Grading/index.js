@@ -1,11 +1,11 @@
 import React from 'react'
 import { RichTextElement } from '@kentico/gatsby-kontent-components'
 
-const TableGrading = ({ data, footnote, id, code }) => {
+const TableGrading = ({ data, footnote }) => {
   return (
     <>
-      <div className="col-md-12" data-kontent-item-id={id}>
-        <div className="grading" data-kontent-element-codename={code}>
+      <div className="col-md-12">
+        <div className="grading">
           <RichTextElement value={data} />
           <div className="grading__footnote">
             <RichTextElement value={footnote} />

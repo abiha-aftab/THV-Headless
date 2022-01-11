@@ -13,7 +13,7 @@ const renderLinkedItem = (linkedItem, id, code) => {
   } = linkedItem
   switch (type) {
     case 'table':
-      return <Table data={elements} id={id} code={code} />
+      return <Table data={elements} />
     case 'infographics':
       return <Infographics data={elements} />
     case 'cards':
