@@ -31,13 +31,14 @@ const Card = ({ data, system }) => {
                 thumbnail: { value: thumbnail },
               } = elements
               return (
-                <div
-                  className="card__video"
-                  key={index}
-                  data-kontent-item-id={contentId}
-                  data-kontent-element-codename={contentCode}
-                >
-                  <Video url={video_id} title={title} thumbnail={thumbnail} />
+                <div className="card__video" key={index}>
+                  <Video
+                    id={contentId}
+                    code={contentCode}
+                    url={video_id}
+                    title={title}
+                    thumbnail={thumbnail}
+                  />
                   <div className="card__video-footer">
                     <p>{title}</p>
                     <div className="card__video-footer-watch-now">

@@ -3,9 +3,9 @@ import { graphql } from 'gatsby'
 import { ImageElement } from '@kentico/gatsby-kontent-components'
 import { FaYoutube } from 'react-icons/fa'
 import { ImYoutube2 } from 'react-icons/im'
-import { StaticImage } from "gatsby-plugin-image"
+import { StaticImage } from 'gatsby-plugin-image'
 
-const Video = ({ url, title, thumbnail = [] }) => {
+const Video = ({ url, title, thumbnail = [], id, code }) => {
   const [showVideo, setShowVideo] = useState(false)
 
   const handleShowVideo = () => {
@@ -13,31 +13,52 @@ const Video = ({ url, title, thumbnail = [] }) => {
   }
 
   return (
-    <div className="video">
-      {showVideo
-        ? (
-          <iframe
-            loading="lazy"
-            className="video__frame"
-            src={`https://www.youtube.com/embed/${url}?autoplay=1&mute=1`}
-            title={title}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            frameBorder="0"
-            webkitallowfullscreen="true"
-            mozallowfullscreen="true"
-            allowFullScreen
-          />
+    <div
+      className="video"
+      data-kontent-item-id={id}
+      data-kontent-element-codename={code}
+    >
+      {showVideo ? (
+        <iframe
+          loading="lazy"
+          className="video__frame"
+          src={`https://www.youtube.com/embed/${url}?autoplay=1&mute=1`}
+          title={title}
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          frameBorder="0"
+          webkitallowfullscreen="true"
+          mozallowfullscreen="true"
+          allowFullScreen
+        />
+      ) : (
+        <div className="video__wrapper">
+          {thumbnail.length > 0 ? (
+            <ImageElement
+              className="video__wrapper-image element"
+              image={thumbnail[0]}
+              alt={`${title} video thumbnail`}
+            />
           ) : (
-          <div className="video__wrapper">
-            {thumbnail.length > 0
-              ? <ImageElement className="video__wrapper-image element" image={thumbnail[0]} alt={`${title} video thumbnail`}/>
-              : <StaticImage className="video__wrapper-image gatsby" src={"./../../assets/images/placeholder.png"} alt={`${title} video thumbnail`} />
-            }
-            <button onClick={handleShowVideo} className="video__wrapper-btn"><FaYoutube/></button>
-            <a href={`https://www.youtube.com/embed/${url}`} target="_blank" className="video__wrapper-banner"><span>Watch on <ImYoutube2/></span></a>
-          </div>
-        )
-      }
+            <StaticImage
+              className="video__wrapper-image gatsby"
+              src={'./../../assets/images/placeholder.png'}
+              alt={`${title} video thumbnail`}
+            />
+          )}
+          <button onClick={handleShowVideo} className="video__wrapper-btn">
+            <FaYoutube />
+          </button>
+          <a
+            href={`https://www.youtube.com/embed/${url}`}
+            target="_blank"
+            className="video__wrapper-banner"
+          >
+            <span>
+              Watch on <ImYoutube2 />
+            </span>
+          </a>
+        </div>
+      )}
     </div>
   )
 }
