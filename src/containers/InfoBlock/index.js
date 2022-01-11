@@ -6,6 +6,7 @@ import renderLinkedItem from '../../utils/renderLinkedItem'
 import SocialSharing from '../SocialSharing'
 
 const InfoBlock = ({ data, id, code, socialSharing = null }) => {
+  console.log('hello', data)
   const { backgroundColor, paddingTop, paddingBottom } = getStyles(data)
   const {
     content: { value: content, modular_content },
@@ -69,6 +70,7 @@ export const query = graphql`
           ...infographics
           ...cards
           system {
+            id
             type
             codename
           }
