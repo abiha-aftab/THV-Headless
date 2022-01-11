@@ -7,7 +7,7 @@ import { FaChevronRight } from 'react-icons/fa'
 import { useTheme } from '../../hooks/useTheme'
 import { prepareTranslations } from '../../utils/prepareTranslations'
 
-const Card = ({ data }) => {
+const Card = ({ data, system }) => {
   const { state } = useTheme()
   const {
     title: { value: title },
