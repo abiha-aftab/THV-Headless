@@ -14,7 +14,11 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
     <section
       className={`${backgroundColor} section ${paddingTop} ${paddingBottom}`}
     >
-      <div className="container infoblock">
+      <div
+        className="container infoblock"
+        data-kontent-item-id={id}
+        data-kontent-element-codename={code}
+      >
         {socialSharing && socialSharing.sources.length > 0 && (
           <SocialSharing
             label={socialSharing.label}
@@ -23,8 +27,6 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
           />
         )}
         <RichTextElement
-          data-kontent-item-id={id}
-          data-kontent-element-codename={code}
           value={content}
           linkedItems={modular_content}
           resolveLinkedItem={(linkedItem) =>
