@@ -15,8 +15,12 @@ import { SITE_TITLE } from '../utils/constants'
 const DynamicZone = lazy(() => import('../containers/DynamicZone'))
 const Resources = lazy(() => import('../containers/Resources'))
 const Orders = lazy(() => import('../containers/Orders'))
-const FormCheckout = lazy(() => import('../components/Form/variants/FormCheckout'))
-const OrderCheckout = lazy(() => import('../components/Order/variants/OrderCheckout'))
+const FormCheckout = lazy(() =>
+  import('../components/Form/variants/FormCheckout')
+)
+const OrderCheckout = lazy(() =>
+  import('../components/Order/variants/OrderCheckout')
+)
 
 export default function PageTemplate({
   pageContext: { languageCode, pageID, pageTitle, codename },
@@ -34,7 +38,6 @@ export default function PageTemplate({
     let key = 'Checkout'
     translatedItemCheckout = prepareTranslations(state.translations, key)
   }
-
   const basketCodenames = ['basket', 'warenkorb']
   const pagesWithTitle = [...basketCodenames, 'checkout', 'thank_you']
   const {
@@ -67,7 +70,9 @@ export default function PageTemplate({
   const navLinks = prepareNavLinks(pages, languageCode)
   return (
     <Layout languageCode={languageCode} navLinks={navLinks} footerData={footer}>
-      {pageTitle && <SEO title={getTitleForGermanyHomePage(languageCode, pageTitle)} />}
+      {pageTitle && (
+        <SEO title={getTitleForGermanyHomePage(languageCode, pageTitle)} />
+      )}
       {pagesWithTitle.indexOf(codename) !== -1 && (
         <section className="section pb-0 container">
           <h1>{pageTitle}</h1>
@@ -112,7 +117,11 @@ export default function PageTemplate({
                       : 'Delivery details'}
                   </h3>
                   <Suspense fallback={<div>Loading...</div>}>
-                    <FormCheckout step={checkoutStep} changeCheckoutStep={handleChangeCheckoutStep} languageCode={languageCode} />
+                    <FormCheckout
+                      step={checkoutStep}
+                      changeCheckoutStep={handleChangeCheckoutStep}
+                      languageCode={languageCode}
+                    />
                   </Suspense>
                 </div>
                 <div className="col-md-4">
@@ -129,7 +138,9 @@ export default function PageTemplate({
                           ? `/basket`
                           : `/${languageCode}/warenkorb`
                       }
-                      onClick={() => { handleChangeCheckoutStep(1) }}
+                      onClick={() => {
+                        handleChangeCheckoutStep(1)
+                      }}
                     >
                       {translatedItemCheckout?.Edit
                         ? translatedItemCheckout?.Edit
@@ -202,6 +213,7 @@ export const query = graphql`
               type
               id
               name
+              codename
             }
           }
         }

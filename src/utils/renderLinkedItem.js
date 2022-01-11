@@ -3,7 +3,7 @@ import Table from '../components/Table'
 import Infographics from '../containers/Infographics'
 import Cards from '../containers/Cards'
 
-const renderLinkedItem = (linkedItem) => {
+const renderLinkedItem = (linkedItem, id, code) => {
   if (!linkedItem) {
     return <strong>⚠ Linked item is no longer in the response.</strong>
   }
@@ -13,7 +13,7 @@ const renderLinkedItem = (linkedItem) => {
   } = linkedItem
   switch (type) {
     case 'table':
-      return <Table data={elements} />
+      return <Table data={elements} id={id} code={code} />
     case 'infographics':
       return <Infographics data={elements} />
     case 'cards':

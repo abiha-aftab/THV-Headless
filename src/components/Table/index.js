@@ -4,7 +4,7 @@ import TableBasic from './variants/Basic'
 import TableHoverable from './variants/Hoverable'
 import { graphql } from 'gatsby'
 
-const Table = ({ data }) => {
+const Table = ({ data, id, code }) => {
   const {
     variant: {
       value: [{ codename: variant }],
@@ -14,11 +14,15 @@ const Table = ({ data }) => {
   } = data
   switch (variant) {
     case 'grading':
-      return <TableGrading data={table} footnote={footnote} />
+      return (
+        <TableGrading data={table} id={id} code={code} footnote={footnote} />
+      )
     case 'basic':
-      return <TableBasic data={table} footnote={footnote} />
+      return <TableBasic data={table} id={id} code={code} footnote={footnote} />
     case 'hoverable':
-      return <TableHoverable data={table} footnote={footnote} />
+      return (
+        <TableHoverable data={table} id={id} code={code} footnote={footnote} />
+      )
     default:
       return null
   }
