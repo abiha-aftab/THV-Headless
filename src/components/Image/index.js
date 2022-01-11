@@ -3,25 +3,10 @@ import { ImageElement } from '@kentico/gatsby-kontent-components'
 import { graphql } from 'gatsby'
 import LazyImg from './lazy-load'
 
-const Image = ({
-  image,
-  className,
-  layout = 'constrained',
-  alt,
-  id = null,
-  codename = null,
-}) => {
+const Image = ({ image, className, layout = 'constrained', alt }) => {
   const { url } = image
   if (url.includes('.svg')) {
-    return (
-      <LazyImg
-        data-kontent-item-id={id}
-        data-kontent-element-codename={codename}
-        className="fluid"
-        alt={alt}
-        datasrc={url}
-      />
-    )
+    return <LazyImg className="fluid" alt={alt} datasrc={url} />
   } else {
     return (
       <ImageElement

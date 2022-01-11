@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import Image from '../Image'
 
 const Infographic = ({ data, system }) => {
+  console.log('infograph ', data)
   const {
     footnote: { value: footnote },
     media: {
@@ -15,13 +16,13 @@ const Infographic = ({ data, system }) => {
             },
             image_alt: { value: alt },
           },
-          system: { id: contentId, codename: contentCodename },
         },
       ],
     },
     title: { value: title },
   } = data
-  const { id, codename } = system
+
+  const { id, codename } = system ?? null
   return (
     <>
       <div className="infographics__item" />
@@ -31,12 +32,7 @@ const Infographic = ({ data, system }) => {
         data-kontent-element-codename={codename}
       >
         <RichTextElement value={title} />
-        <Image
-          image={image}
-          alt={alt}
-          id={contentId}
-          codename={contentCodename}
-        />
+        <Image image={image} alt={alt} />
         <RichTextElement value={footnote} />
       </div>
       <div className="infographics__item" />
@@ -55,6 +51,10 @@ export const query = graphql`
       media {
         value {
           ...image
+          system {
+            id
+            codename
+          }
         }
       }
       footnote {
