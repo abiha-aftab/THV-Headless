@@ -18,6 +18,7 @@ const CallToAction = ({
             text: { value: text },
             link: { value: link },
           },
+          system: { id: contentId, codename: contentCode },
         },
       ],
     },
@@ -29,7 +30,13 @@ const CallToAction = ({
       className={`container section cta${title ? ' with-title' : ''}`}
     >
       {title && <h2 className="cta__title">{title}</h2>}
-      <Cta link={link} text={text} languageCode={languageCode} />
+      <Cta
+        link={link}
+        text={text}
+        languageCode={languageCode}
+        id={contentId}
+        codename={contentCode}
+      />
     </section>
   )
 }
@@ -45,6 +52,10 @@ export const query = graphql`
       cta {
         value {
           ...cta
+          system {
+            id
+            codename
+          }
         }
       }
     }
