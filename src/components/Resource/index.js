@@ -3,7 +3,7 @@ import React from 'react'
 import Model from './variants/Model'
 import Pdf from './variants/Pdf'
 
-const Resource = ({ data, id, languageCode = 'en' }) => {
+const Resource = ({ data, id, languageCode = 'en', system }) => {
   const {
     title: { value: title },
     description: { value: description },
@@ -15,7 +15,7 @@ const Resource = ({ data, id, languageCode = 'en' }) => {
     },
     pricing__price: { value: price },
   } = data
-
+  const { id: contentID, codename: contentCode } = system
   const shortTitle = title.length > 50 ? title.substring(0, 50) + '...' : title
 
   switch (variant) {
@@ -29,6 +29,8 @@ const Resource = ({ data, id, languageCode = 'en' }) => {
           media={media}
           price={price}
           languageCode={languageCode}
+          contentId={contentID}
+          contentCodename={contentCode}
         />
       )
     case 'pdf':

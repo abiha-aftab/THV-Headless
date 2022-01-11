@@ -225,6 +225,10 @@ export const query = graphql`
         resources {
           value {
             ...resources
+            system {
+              id
+              codename
+            }
           }
         }
       }

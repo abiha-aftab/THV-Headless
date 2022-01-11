@@ -13,6 +13,8 @@ const Model = ({
   media,
   price,
   id,
+  contentId,
+  contentCodename,
   languageCode = 'en',
 }) => {
   const {
@@ -45,7 +47,11 @@ const Model = ({
   }
 
   return (
-    <article className="resource">
+    <article
+      className="resource"
+      data-kontent-item-id={contentId}
+      data-kontent-element-codename={contentCodename}
+    >
       {showBanner && (
         <div className=" order-banner">
           <span>
