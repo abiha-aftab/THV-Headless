@@ -114,7 +114,7 @@ const PDFViewer = ({
   }
 
   return (
-    <div data-kontent-item-id={id}>
+    <div>
       {showBanner && (
         <div className=" order-banner">
           <span>
