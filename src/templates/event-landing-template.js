@@ -85,7 +85,7 @@ export default function EventsTemplate({
           </h1>
           <div
             className="events"
-            data-kontent-item-id={pageID}
+            data-kontent-item-id="1cae99d7-48ac-49e0-ab36-81c2268c6425"
             data-kontent-element-codename="events"
             data-kontent-add-button
             data-kontent-add-button-render-position="bottom"
