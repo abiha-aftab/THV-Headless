@@ -30,7 +30,7 @@ export default function PageTemplate({
   const handleChangeCheckoutStep = (step) => {
     setCheckoutStep(step)
   }
-
+  console.log('basket', codename)
   let translatedItemCheckout = ''
   if (state.translations.length) {
     let key = 'Checkout'
@@ -54,7 +54,6 @@ export default function PageTemplate({
     },
     footer,
   } = data
-  console.log('references ', references)
   const socialSharing = {
     locale: languageCode,
     pageTitle: pageTitle,
@@ -72,7 +71,11 @@ export default function PageTemplate({
         <SEO title={getTitleForGermanyHomePage(languageCode, pageTitle)} />
       )}
       {pagesWithTitle.indexOf(codename) !== -1 && (
-        <section className="section pt-5 pb-0 container">
+        <section
+          className="section pt-5 pb-0 container"
+          data-kontent-item-id={pageID}
+          data-kontent-element-codename={codename}
+        >
           <h1>{pageTitle}</h1>
         </section>
       )}

@@ -4,7 +4,6 @@ import { graphql } from 'gatsby'
 import Image from '../Image'
 
 const Infographic = ({ data, system }) => {
-  console.log('infograph ', data)
   const {
     footnote: { value: footnote },
     media: {

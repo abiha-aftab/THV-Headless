@@ -3,7 +3,6 @@ import Infographic from '../../components/Infographic'
 import { graphql } from 'gatsby'
 
 const Infographics = ({ data }) => {
-  console.log('info data ', data)
   const {
     title: { value: title },
     infographics: { value: infographics },

@@ -6,7 +6,6 @@ const Cards = ({ data }) => {
   const {
     cards: { value: cards },
   } = data
-  console.log('cards', cards)
   return (
     <>
       {cards && cards.length > 1 && (

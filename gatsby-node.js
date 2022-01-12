@@ -271,7 +271,13 @@ exports.createPages = async ({ actions, graphql }) => {
       createPage({
         path: path,
         component: require.resolve(`${pageTemplatePath}`),
-        context: { languageCode: language, pageID, pageTitle, pageSlug, codename },
+        context: {
+          languageCode: language,
+          pageID,
+          pageTitle,
+          pageSlug,
+          codename,
+        },
       })
       if (process.env.ENVIRONMENT === 'development') {
         const spotlightlightslug = page.elements.url
@@ -352,11 +358,13 @@ exports.createPages = async ({ actions, graphql }) => {
         component: path.resolve(`./src/templates/site-map-template.js`),
         context: { languageCode: language },
       })
-      createPage({
-        path: `/preview/${language}/sitemap`,
-        component: path.resolve(`./src/templates/site-map-template.js`),
-        context: { languageCode: language },
-      })
+      if (process.env.ENVIRONMENT === 'development') {
+        createPage({
+          path: `/preview/${language}/sitemap`,
+          component: path.resolve(`./src/templates/site-map-template.js`),
+          context: { languageCode: language },
+        })
+      }
     }
   }
 }

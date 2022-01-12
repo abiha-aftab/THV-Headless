@@ -3,7 +3,6 @@ import React from 'react'
 import Resource from '../../components/Resource'
 
 const Resources = ({ data, languageCode = 'en' }) => {
-  console.log('resources', data)
   const [
     {
       elements: {

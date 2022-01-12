@@ -21,13 +21,14 @@
             font-weight: bold;
             color: #505759;
             vertical-align: middle;
+            z-index: 1;
+            position: relative;
           }
         }
         &:nth-of-type(n) {
           > td {
             &:first-of-type {
               background-color: #d1dde0;
-              position: sticky;
             }
           }
         }
