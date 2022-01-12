@@ -19,6 +19,7 @@ const Resources = ({ data, languageCode = 'en' }) => {
     >
       <div
         className="container gap-2 grid-1 grid-md-3"
+        data-kontent-item-id={id}
         data-kontent-element-codename="resources"
         data-kontent-add-button
         data-kontent-render-position="left"
