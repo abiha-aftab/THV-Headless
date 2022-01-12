@@ -17,7 +17,14 @@ const Resources = ({ data, languageCode = 'en' }) => {
       data-kontent-item-id={id}
       data-kontent-element-codename={codename}
     >
-      <div className="container gap-2 grid-1 grid-md-3">
+      <div
+        className="container gap-2 grid-1 grid-md-3"
+        data-kontent-item-id={id}
+        data-kontent-element-codename={codename}
+        data-kontent-add-button
+        data-kontent-render-position="left"
+        data-kontent-insert-position="start"
+      >
         {resources.map((resource) => {
           const { id, elements, system } = resource
           return (
