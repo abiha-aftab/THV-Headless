@@ -30,7 +30,7 @@ export default function PageTemplate({
   const handleChangeCheckoutStep = (step) => {
     setCheckoutStep(step)
   }
-  console.log('basket', codename)
+
   let translatedItemCheckout = ''
   if (state.translations.length) {
     let key = 'Checkout'
