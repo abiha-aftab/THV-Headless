@@ -33,11 +33,9 @@ const Intro = ({ data, socialSharing }) => {
     <section
       className="container-right grid-md-12 gap-4 intro"
       data-kontent-item-id={id}
+      data-kontent-element-codename={codename}
     >
-      <div
-        className="col-md-7 intro__content"
-        data-kontent-element-codename={codename}
-      >
+      <div className="col-md-7 intro__content">
         {sources.length > 0 && (
           <SocialSharing
             locale={locale}

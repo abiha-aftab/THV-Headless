@@ -6,13 +6,13 @@ import FormBasic from '../../components/Form/variants/FormBasic'
 const MarketoForm = ({ formTitle, description, form_number, id, codename }) => {
   return (
     <section className="section bg-sky-light">
-      <div className="container">
+      <div
+        className="container"
+        data-kontent-item-id={id}
+        data-kontent-element-codename={codename}
+      >
         <h2>{formTitle}</h2>
-        <div
-          className="grid-md-2"
-          data-kontent-item-id={id}
-          data-kontent-element-codename={codename}
-        >
+        <div className="grid-md-2">
           <RichTextElement value={description} />
           <FormBasic id={form_number} />
         </div>
