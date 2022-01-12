@@ -22,43 +22,62 @@ const Orders = ({ languageCode = 'en' }) => {
     translatedItemCheckout = prepareTranslations(state.translations, key)
   }
 
+  let translatedItemSpotlight = ''
+  if (state.translations.length) {
+    let key = 'webspotlightCheckout'
+    if (state.translations && key) {
+      translatedItemSpotlight = state.translations.find((x) => x.key === key)
+    }
+  }
+  const { id, codename } = translatedItemSpotlight?.value ?? {}
+
   return (
     <div className="section container">
-      {orders.length !== 0 &&
+      {orders.length !== 0 && (
         <div className="grid-md-12 orderBasic">
-          <div className="col-md-9 orderBasic__item-contain">
-          <h3 className="mb-1">
-            {translatedItemCheckout?.Title
-              ? translatedItemCheckout?.Title
-              : 'My Orders'}
-          </h3>
+          <div
+            className="col-md-9 orderBasic__item-contain"
+            data-kontent-item-id={id}
+            data-kontent-element-codename={codename}
+          >
+            <h3 className="mb-1">
+              {translatedItemCheckout?.Title
+                ? translatedItemCheckout?.Title
+                : 'My Orders'}
+            </h3>
           </div>
-          <div className="col-md-3 orderBasic__quantity title">
-          <h3 className="mb-1">
-            {translatedItemCheckout?.Quantity
-              ? translatedItemCheckout?.Quantity
-              : 'Quantity'}
-          </h3>
+          <div
+            className="col-md-3 orderBasic__quantity title"
+            data-kontent-item-id={id}
+            data-kontent-element-codename={codename}
+          >
+            <h3 className="mb-1">
+              {translatedItemCheckout?.Quantity
+                ? translatedItemCheckout?.Quantity
+                : 'Quantity'}
+            </h3>
           </div>
           {orders.map((order, index) => {
             return <OrderBasic key={index} data={order} />
           })}
         </div>
-      }
+      )}
       {orders.length !== 0 && (
         <Link
           aria-label="Next page, to checkout"
           className="btn btn-crimson btn-next mt-2 mb-2"
           to={languageCode === 'en' ? '/checkout' : `/${languageCode}/checkout`}
+          data-kontent-item-id={id}
+          data-kontent-element-codename={codename}
         >
           {translatedItemCheckout?.NextStep
             ? translatedItemCheckout?.NextStep
             : 'Next'}
-          <FaChevronRight/>
+          <FaChevronRight />
         </Link>
       )}
       {!orders.length && (
-        <h4>
+        <h4 data-kontent-item-id={id} data-kontent-element-codename={codename}>
           {translatedItemCheckout?.EmptyCart
             ? translatedItemCheckout?.EmptyCart
             : 'There is nothing in your cart.'}

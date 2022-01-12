@@ -85,6 +85,7 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
         )
           .then((response) => response.json())
           .then((results) => {
+            console.log('results', results)
             let val = results.item.elements.translation.value.length
             for (let i = 0; i < val; i++) {
               const { elements, system } =
@@ -93,8 +94,11 @@ const Layout = ({ children, languageCode = 'en', navLinks, footerData }) => {
                 key: system.name,
                 value: elements.value.value,
               })
+              tmp.push({
+                key: `webspotlight${system.name}`,
+                value: system,
+              })
             }
-
             setTranslations(tmp)
             actions.changeTranslations(tmp)
           })
