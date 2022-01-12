@@ -44,6 +44,7 @@ export default function EventsTemplate({
                 description: { value: description },
                 title: { value: formTitle },
               },
+              system: { id: marketoId, codename: marketoCodename },
             },
           ],
         },
@@ -105,7 +106,11 @@ export default function EventsTemplate({
             })}
           </div>
         </div>
-        <div className="col-md-5 d-none d-md-block">
+        <div
+          className="col-md-5 d-none d-md-block"
+          data-kontent-item-id={pageID}
+          data-kontent-element-codename={codename}
+        >
           <Image image={image} />
         </div>
       </section>
@@ -113,6 +118,8 @@ export default function EventsTemplate({
         formTitle={formTitle}
         description={description}
         form_number={form_number}
+        id={marketoId}
+        codename={marketoCodename}
       />
     </Layout>
   )
@@ -150,6 +157,10 @@ export const query = graphql`
         marketo_form {
           value {
             ...marketoForm
+            system {
+              id
+              codename
+            }
           }
         }
         title {
