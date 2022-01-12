@@ -7,7 +7,14 @@ const Events = ({ events, title, description, id, codename }) => {
     <div data-kontent-item-id={id} data-kontent-element-codename={codename}>
       <h3>{title}</h3>
       <p className="mb-2">{description}</p>
-      <div className="grid-md-2 events__item">
+      <div
+        className="grid-md-2 events__item"
+        data-kontent-item-id={id}
+        data-kontent-element-codename="events"
+        data-kontent-add-button
+        data-kontent-add-button-render-position="bottom"
+        data-kontent-add-button-insert-position="after"
+      >
         {events.map((event) => {
           const {
             elements: {

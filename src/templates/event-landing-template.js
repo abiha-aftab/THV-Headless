@@ -83,14 +83,7 @@ export default function EventsTemplate({
           >
             {heading}
           </h1>
-          <div
-            className="events"
-            data-kontent-item-id="1cae99d7-48ac-49e0-ab36-81c2268c6425"
-            data-kontent-element-codename="events"
-            data-kontent-add-button
-            data-kontent-add-button-render-position="bottom"
-            data-kontent-add-button-insert-position="after"
-          >
+          <div className="events">
             {events.map((event) => {
               const {
                 elements: {
