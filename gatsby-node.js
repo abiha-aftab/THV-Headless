@@ -254,13 +254,13 @@ exports.createPages = async ({ actions, graphql }) => {
         ? page.elements.url.value === 'heart-failure-and-tr'
           ? ''
           : page.elements.url.value
-              .replace(/^\/+|\/+$/g, '')
-              .toLowerCase()
-              .trim()
-        : page.elements.seo__slug?.value
             .replace(/^\/+|\/+$/g, '')
             .toLowerCase()
             .trim()
+        : page.elements.seo__slug?.value
+          .replace(/^\/+|\/+$/g, '')
+          .toLowerCase()
+          .trim()
 
       const regionalPath = language !== 'en' ? `/${language}` : ''
       const path = `${regionalPath}/${pageSlug}`
@@ -282,14 +282,21 @@ exports.createPages = async ({ actions, graphql }) => {
       if (process.env.ENVIRONMENT === 'development') {
         const spotlightlightslug = page.elements.url
           ? page.elements.url.value
-              .replace(/^\/+|\/+$/g, '')
-              .toLowerCase()
-              .trim()
+            .replace(/^\/+|\/+$/g, '')
+            .toLowerCase()
+            .trim()
           : page.elements.seo__slug?.value
-              .replace(/^\/+|\/+$/g, '')
-              .toLowerCase()
-              .trim()
-        const webspotlightPath = `/preview/${language}/${spotlightlightslug}`
+            .replace(/^\/+|\/+$/g, '')
+            .toLowerCase()
+            .trim()
+
+        const webspotlightPath
+        if (type === 'event_landing') {
+          webspotlightPath = `/preview/${language}/${pageID}`
+        }
+        else {
+          webspotlightPath = `/preview/${language}/${spotlightlightslug}`
+        }
         createPage({
           path: webspotlightPath,
           component: require.resolve(`${pageTemplatePath}`),
