@@ -7,7 +7,10 @@ const Event = ({ url, title, thumbnail, id, codename }) => {
     <article
       className="events__event"
       data-kontent-item-id={id}
-      data-kontent-element-codename={codename}
+      data-kontent-element-codename="events"
+      data-kontent-add-button
+      data-kontent-add-button-render-position="bottom"
+      data-kontent-add-button-insert-position="after"
     >
       <Video url={url} title={title} thumbnail={thumbnail} />
       <p className="mb-0">
