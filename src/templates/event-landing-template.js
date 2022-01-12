@@ -51,7 +51,6 @@ export default function EventsTemplate({
     },
     footer,
   } = data
-
   const { state } = useTheme()
   const [title, setTitle] = useState(null)
 
@@ -77,7 +76,12 @@ export default function EventsTemplate({
               mailto={mailto}
             />
           )}
-          <h1>{heading}</h1>
+          <h1
+            data-kontent-item-id={pageID}
+            data-kontent-element-codename={codename}
+          >
+            {heading}
+          </h1>
           <div className="events">
             {events.map((event) => {
               const {
@@ -86,6 +90,7 @@ export default function EventsTemplate({
                   events: { value: events },
                   description: { value: description },
                 },
+                system: { id, codename },
               } = event
               return (
                 <Events
@@ -93,6 +98,8 @@ export default function EventsTemplate({
                   events={events}
                   title={title}
                   description={description}
+                  id={id}
+                  codename={codename}
                 />
               )
             })}
@@ -156,6 +163,10 @@ export const query = graphql`
         events {
           value {
             ...events
+            system {
+              id
+              codename
+            }
           }
         }
       }

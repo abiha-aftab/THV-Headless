@@ -2,9 +2,9 @@ import React from 'react'
 import Event from './Event'
 import { graphql } from 'gatsby'
 
-const Events = ({ events, title, description }) => {
+const Events = ({ events, title, description, id, codename }) => {
   return (
-    <>
+    <div data-kontent-item-id={id} data-kontent-element-codename={codename}>
       <h3>{title}</h3>
       <p className="mb-2">{description}</p>
       <div className="grid-md-2 events__item">
@@ -17,17 +17,27 @@ const Events = ({ events, title, description }) => {
                   {
                     elements: {
                       video_id: { value: video_id },
-                      thumbnail: {value: thumbnail},
+                      thumbnail: { value: thumbnail },
                     },
                   },
                 ],
               },
             },
+            system: { id: contentId, codename: contentCodename },
           } = event
-          return <Event key={title} title={title} url={video_id} thumbnail={thumbnail} />
+          return (
+            <Event
+              key={title}
+              title={title}
+              url={video_id}
+              thumbnail={thumbnail}
+              id={contentId}
+              codename={contentCodename}
+            />
+          )
         })}
       </div>
-    </>
+    </div>
   )
 }
 
@@ -45,6 +55,10 @@ export const query = graphql`
       events {
         value {
           ...event
+          system {
+            id
+            codename
+          }
         }
       }
     }
