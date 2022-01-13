@@ -2,7 +2,7 @@ import React from 'react'
 import Card from '../../components/Card'
 import { graphql } from 'gatsby'
 
-const Cards = ({ data, id }) => {
+const Cards = ({ data, code }) => {
   const {
     cards: { value: cards },
   } = data
@@ -11,7 +11,7 @@ const Cards = ({ data, id }) => {
       {cards && cards.length > 1 && (
         <div
           className={`gap-1 grid-md-${cards.length}`}
-          data-kontent-item-id={id}
+          data-kontent-component-id={code}
           data-kontent-element-codename="cards"
           data-kontent-add-button
           data-kontent-add-button-render-position="bottom"

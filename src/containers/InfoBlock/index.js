@@ -8,6 +8,9 @@ import SocialSharing from '../SocialSharing'
 const InfoBlock = ({ data, id, code, socialSharing = null }) => {
   const { backgroundColor, paddingTop, paddingBottom } = getStyles(data)
   const {
+    content: { modular_content: systemCode },
+  } = data
+  const {
     content: { value: content, modular_content },
   } = data
   return (
@@ -34,7 +37,7 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
           value={content}
           linkedItems={modular_content}
           resolveLinkedItem={(linkedItem) =>
-            renderLinkedItem(linkedItem, id, code)
+            renderLinkedItem(linkedItem, systemCode[0]?.system?.codename)
           }
         />
       </div>
