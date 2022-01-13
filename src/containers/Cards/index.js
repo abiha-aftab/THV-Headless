@@ -2,14 +2,21 @@ import React from 'react'
 import Card from '../../components/Card'
 import { graphql } from 'gatsby'
 
-const Cards = ({ data }) => {
+const Cards = ({ data, id }) => {
   const {
     cards: { value: cards },
   } = data
   return (
     <>
       {cards && cards.length > 1 && (
-        <div className={`gap-1 grid-md-${cards.length}`}>
+        <div
+          className={`gap-1 grid-md-${cards.length}`}
+          data-kontent-item-id={id}
+          data-kontent-element-codename="cards"
+          data-kontent-add-button
+          data-kontent-add-button-render-position="bottom"
+          data-kontent-add-button-insert-position="after"
+        >
           {cards &&
             cards.map((card) => {
               const { elements, id, system } = card
