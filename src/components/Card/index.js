@@ -27,9 +27,6 @@ const Card = ({ data, system }) => {
       className="card"
       data-kontent-item-id={id}
       data-kontent-element-codename={codename}
-      data-kontent-add-button
-      data-kontent-add-button-render-position="bottom"
-      data-kontent-add-button-insert-position="after"
     >
       {media &&
         media.map((item, index) => {
