@@ -13,9 +13,6 @@ const Cards = ({ data, code }) => {
           className={`gap-1 grid-md-${cards.length}`}
           data-kontent-component-id={code}
           data-kontent-element-codename="cards"
-          data-kontent-add-button
-          data-kontent-add-button-render-position="bottom"
-          data-kontent-add-button-insert-position="after"
         >
           {cards &&
             cards.map((card) => {
