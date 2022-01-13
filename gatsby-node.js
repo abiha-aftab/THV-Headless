@@ -251,7 +251,8 @@ exports.createPages = async ({ actions, graphql }) => {
         pageTemplatePath = './src/templates/page-template.js'
       }
       const pageSlug = page.elements.url
-        ? page.elements.url.value === 'heart-failure-and-tr'
+        ? page.elements.url.value === 'heart-failure-and-tr' ||
+          page.elements.url.value === 'herzinsuffizienz-und-ti'
           ? ''
           : page.elements.url.value
               .replace(/^\/+|\/+$/g, '')

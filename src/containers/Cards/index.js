@@ -16,7 +16,7 @@ const Cards = ({ data, code }) => {
           data-kontent-add-button-render-position="bottom"
           data-kontent-add-button-insert-position="after"
         >
-          <div data-kontent-element-codename="cards">
+          <div className="componentCard" data-kontent-element-codename="cards">
             {cards &&
               cards.map((card) => {
                 const { elements, id, system } = card
