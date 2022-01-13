@@ -17,7 +17,7 @@ const renderLinkedItem = (linkedItem, id, code) => {
     case 'infographics':
       return <Infographics data={elements} />
     case 'cards':
-      return <Cards data={elements} id={id} codename={code} />
+      return <Cards data={elements} id={id} />
     default:
       return <h1>{type}</h1>
   }
