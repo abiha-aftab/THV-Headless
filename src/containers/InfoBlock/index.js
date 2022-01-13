@@ -20,7 +20,7 @@ const InfoBlock = ({ data, id, code, socialSharing = null }) => {
       <div
         className="container infoblock"
         data-kontent-item-id={id}
-        data-kontent-element-codename={code}
+        data-kontent-element-codename="content"
       >
         {socialSharing && socialSharing.sources.length > 0 && (
           <SocialSharing
