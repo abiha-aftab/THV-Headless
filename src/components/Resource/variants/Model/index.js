@@ -45,6 +45,11 @@ const Model = ({
     let key = 'Checkout'
     translatedItemCheckout = prepareTranslations(state.translations, key)
   }
+  let translatedItemResource = ''
+  if (state.translations.length) {
+    let key = 'Resource'
+    translatedItemResource = prepareTranslations(state.translations, key)
+  }
 
   return (
     <article
@@ -82,7 +87,7 @@ const Model = ({
       <div className="resource__footer resource__footer--model">
         {price.length !== 0 && (
           <button className="resource__purchase" onClick={updateOrders}>
-            <BsCart /> Free
+            <BsCart /> {translatedItemResource?.Free ? translatedItemResource?.Free : 'Free'}
           </button>
         )}
       </div>

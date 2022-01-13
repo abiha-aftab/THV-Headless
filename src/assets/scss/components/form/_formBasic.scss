@@ -1,3 +1,15 @@
+.formTitle {
+  color: $color-crimson;
+}
+form {
+  a {
+    color: $color-dark-gray;
+    text-decoration: none;
+    &:hover {
+      color: $color-crimson;
+    }
+  }
+}
 .stayInformedForm .mktoForm {
   margin-top: 1rem;
   display: flex;

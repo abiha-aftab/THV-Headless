@@ -113,8 +113,14 @@ const PDFViewer = ({
     translatedItemCheckout = prepareTranslations(state.translations, key)
   }
 
+  let translatedItemResource = ''
+  if (state.translations.length) {
+    let key = 'Resource'
+    translatedItemResource = prepareTranslations(state.translations, key)
+  }
+
   return (
-    <div>
+    <div className="modal__wrapper">
       {showBanner && (
         <div className=" order-banner">
           <span>
@@ -166,7 +172,7 @@ const PDFViewer = ({
                       aria-label="Close"
                       onClick={handleClose}
                     >
-                      Close <span aria-hidden="true">&times;</span>
+                      {translatedItemResource?.Close ? translatedItemResource?.Close : 'Close'} <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div>
@@ -195,16 +201,18 @@ const PDFViewer = ({
                       className="pdfv-download-button-link"
                       onClick={handleClose}
                     >
-                      <BsDownload /> Download
+                      <BsDownload /> <span className="label-download">Download</span>
                     </a>
                   </div>
                   {price.length !== 0 && (
                     <div className="modal__footer-order">
                       <div className="pdfv-d-inline-block pdfv-float-right">
                         <div className="pdfv-d-flex flex-wrap">
-                          <div className="pdfv-free-order">Free Order</div>
+                          <div className="pdfv-free-order">
+                            {translatedItemResource?.FreeOrder ? translatedItemResource?.FreeOrder : 'Free Order'}
+                          </div>
                           <div className="pdfv-quantity pdfv-mr-3">
-                            Quantity
+                            {translatedItemResource?.Quantity ? translatedItemResource?.Quantity : 'Quantity'}
                           </div>
                           <div className="pdfv-mr-3 pdfv-d-inline-block">
                             <div className="pdfv-input-group">
@@ -234,16 +242,19 @@ const PDFViewer = ({
                               </div>
                             </div>
                           </div>
-                          <div>
-                            <a
-                              onClick={handleAddToCart}
-                              role="button"
-                              className="pdfv-order-button-link align-middle order-modal-link"
-                            >
-                              <RiShoppingBasketLine />
-                              Add to order
-                            </a>
-                          </div>
+                          <a
+                            onClick={handleAddToCart}
+                            role="button"
+                            className="pdfv-order-button-link align-middle order-modal-link"
+                          >
+                            <RiShoppingBasketLine />
+                            <span className="label-add show-desktop">
+                              {translatedItemResource?.AddToOrder ? translatedItemResource?.AddToOrder : 'Add to Order'}
+                            </span>
+                            <span className="label-add show-mobile">
+                              {translatedItemResource?.Add ? translatedItemResource?.Add : 'Add (free)'}
+                            </span>
+                          </a>
                         </div>
                       </div>
                     </div>

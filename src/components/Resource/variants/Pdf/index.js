@@ -61,6 +61,12 @@ const Pdf = ({
     translatedItemCheckout = prepareTranslations(state.translations, key)
   }
 
+  let translatedItemResource = ''
+  if (state.translations.length) {
+    let key = 'Resource'
+    translatedItemResource = prepareTranslations(state.translations, key)
+  }
+
   return (
     <article
       className="resource"
@@ -121,7 +127,7 @@ const Pdf = ({
         )}
         {price.length !== 0 && (
           <button className="resource__purchase" onClick={updateOrders}>
-            <BsCart /> Free
+            <BsCart /> {translatedItemResource?.Free ? translatedItemResource?.Free : 'Free'}
           </button>
         )}
       </div>

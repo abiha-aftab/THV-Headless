@@ -3,7 +3,7 @@ import { RichTextElement } from '@kentico/gatsby-kontent-components'
 import { graphql } from 'gatsby'
 import Image from '../Image'
 
-const Infographic = ({ data, system }) => {
+const Infographic = ({ data, system, className }) => {
   const {
     footnote: { value: footnote },
     media: {
@@ -24,9 +24,9 @@ const Infographic = ({ data, system }) => {
   const { id, codename } = system ?? null
   return (
     <>
-      <div className="infographics__item" />
+      <div className={`${className}__item`} />
       <div
-        className="infographics__item"
+        className={`${className}__item`}
         data-kontent-item-id={id}
         data-kontent-element-codename={codename}
       >
@@ -34,7 +34,7 @@ const Infographic = ({ data, system }) => {
         <Image image={image} alt={alt} />
         <RichTextElement value={footnote} />
       </div>
-      <div className="infographics__item" />
+      <div className={`${className}__item`} />
     </>
   )
 }

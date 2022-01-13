@@ -8,8 +8,7 @@ import { prepareNavLinks } from '../utils/prepareNavLinks'
 import SocialSharing from '../containers/SocialSharing'
 import SEO from '../components/SEO'
 import { useTheme } from '../hooks/useTheme'
-import { getSelectedLanguage } from '../utils/helpers'
-import { SITE_TITLE } from '../utils/constants'
+import { getSelectedLanguage, getTitlePart } from '../utils/helpers'
 
 export default function EventsTemplate({
   pageContext: { languageCode, pageID, pageTitle, pageSlug, codename },
@@ -57,7 +56,7 @@ export default function EventsTemplate({
 
   useEffect(() => {
     const language = getSelectedLanguage(state)
-    setTitle(`${pageTitle} - ${SITE_TITLE} ${language.region}`)
+    setTitle(`${pageTitle} - ${getTitlePart(language.name)} ${language.region}`)
   }, [])
 
   const navLinks = prepareNavLinks(pages, languageCode)
@@ -65,7 +64,7 @@ export default function EventsTemplate({
     <Layout languageCode={languageCode} navLinks={navLinks} footerData={footer}>
       {title && <SEO title={title} />}
       <section className="container-right grid-md-12 gap-4 m-section events-section">
-        <div className="col-md-7 mt-2 mt-md-5">
+        <div className="col-md-7 mt-2 mb-2 mt-md-5">
           {socialSources.length > 0 && (
             <SocialSharing
               locale={languageCode}

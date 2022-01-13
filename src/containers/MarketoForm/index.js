@@ -11,7 +11,8 @@ const MarketoForm = ({ formTitle, description, form_number, id, codename }) => {
         data-kontent-item-id={id}
         data-kontent-element-codename={codename}
       >
-        <h2>{formTitle}</h2>
+        <h2 className="formTitle">{formTitle}</h2>
+
         <div className="grid-md-2">
           <RichTextElement value={description} />
           <FormBasic id={form_number} />

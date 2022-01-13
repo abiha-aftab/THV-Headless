@@ -1,4 +1,7 @@
 .modal {
+  &__wrapper {
+    z-index: 3;
+  }
   position: relative;
   display: flex;
   flex-direction: column;
@@ -152,7 +155,7 @@
   height:50px;
   color: $color-dark-gray;
   background: $color-white;
-  border: 1px solid $color-dark-gray;
+  border: 1px solid transparent;
   box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
@@ -252,4 +255,62 @@
 .pdfv-download-button-link:hover > svg > path {
   stroke: $color-white;
 }
+.pdfv-order-button-link {
+  .show-mobile {
+    display: none;
+  }
+}
+@media (max-width: 1024px) {
+  .modal__footer-download {
+    width: 50px;
+  }
+  .modal__footer-order {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+  }
+  .pdfv-float-right {
+    float: unset;
+  }
 
+  .label-download {
+    display: none;
+  }
+  .pdfv-download-button-link {
+    width: 100%;
+  }
+  .pdfv-free-order {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  .pdfv-quantity {
+    display: none;
+  }
+  .modal__footer-order {
+    margin-left: 5px;
+    margin-right: 5px;
+    justify-content: center;
+  }
+  .pdfv-d-flex {
+    display: block !important;
+  }
+  .pdfv-order-button-link, .pdfv-download-button-link, .button-plus-quantity, .button-minus-quantity {
+    height: 40px;
+    line-height: 40px;
+  }
+  .pdfv-order-button-link {
+    width: 50px;
+  }
+  .label-add {
+    display: none;
+  }
+}
+@media (max-width: 320px) {
+  .modal__footer-download {
+    width: 40px;
+  }
+  .pdfv-order-button-link {
+    width: 40px;
+  }
+}

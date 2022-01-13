@@ -164,7 +164,7 @@ const FormCheckout = ({ step = 2, changeCheckoutStep, languageCode = 'en' }) => 
           }}
         >
           {(formik) => (
-            <Form className="form">
+            <Form className="form checkout">
               <div className="gap-2 grid-md-2 mb-2">
                 <Text label={firstName} name="firstName" type="text" required />
                 <Text label={surname} name="lastName" type="text" required />
@@ -233,7 +233,7 @@ const FormCheckout = ({ step = 2, changeCheckoutStep, languageCode = 'en' }) => 
                   }
                 />
                 {languageCode === 'en' ? (
-                  <p className="small">
+                  <p className="form__fieldset-small">
                     {translatedItemCheckoutForm?.AgreeToTerms
                       ? translatedItemCheckoutForm?.AgreeToTerms
                       : 'By providing your personal information, you agree to allow Edwards Lifesciences and its agents to use this information to communicate with you in the future, including information about products, services, events, and programs. Edwards Lifesciences and its agents will not sell, rent, or otherwise distribute your name and any personally identifiable information outside of Edwards Lifesciences and its agents. Edwards Lifesciences will use your information in accordance with the Edwards Privacy Policy.'}
