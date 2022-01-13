@@ -9,27 +9,27 @@
     @include md {
       padding: 0 1rem;
     }
-    &__video-footer {
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: $color-white;
-      position: relative;
-      p {
-        width: 100%;
-        font-weight: $font-weight-bold;
-        margin: 1rem 1rem 2rem 1rem;
-        height: auto;
-        @include md {
-          height: 3rem;
-        }
-        @include lg {
-          margin: 2rem;
-          width: 66.66%;
-          height: 3rem;
-          overflow: hidden;
-        }
+  }
+  &__video-footer {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $color-white;
+    position: relative;
+    p {
+      width: 100%;
+      font-weight: $font-weight-bold;
+      margin: 1rem 1rem 2rem 1rem;
+      height: auto;
+      @include md {
+        height: 3rem;
+      }
+      @include lg {
+        margin: 2rem;
+        width: 66.66%;
+        height: 3rem;
+        overflow: hidden;
       }
     }
   }

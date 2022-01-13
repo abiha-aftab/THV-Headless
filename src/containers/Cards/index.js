@@ -9,16 +9,24 @@ const Cards = ({ data, code }) => {
   return (
     <>
       {cards && cards.length > 1 && (
-        <div className={`gap-1 grid-md-${cards.length}`}>
-          {cards &&
-            cards.map((card) => {
-              const { elements, id, system } = card
-              return (
-                <Card data={elements} key={id} system={system}>
-                  Cards
-                </Card>
-              )
-            })}
+        <div
+          className={`gap-1 grid-md-${cards.length}`}
+          data-kontent-component-id={code}
+          data-kontent-add-button
+          data-kontent-add-button-render-position="bottom"
+          data-kontent-add-button-insert-position="after"
+        >
+          <div className="componentCard" data-kontent-element-codename="cards">
+            {cards &&
+              cards.map((card) => {
+                const { elements, id, system } = card
+                return (
+                  <Card data={elements} key={id} system={system}>
+                    Cards
+                  </Card>
+                )
+              })}
+          </div>
         </div>
       )}
       {cards && cards.length === 1 && (
